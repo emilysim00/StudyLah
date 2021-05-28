@@ -9,11 +9,14 @@ date_default_timezone_set('Asia/Singapore');
 <head>
     <meta charset="utf-8" />
     <link rel="icon" href="img\studylah_logo.jpg" type="image/jpg">
+    <link rel="stylesheet" href="css\verify.css">
     <title>StudyLah</title>
 </head>
 <style>
 </style>
 <body>
+    <div class="img">
+    <div id="background">
 <?php
     $servername = "localhost";
     $username = "root";
@@ -62,12 +65,15 @@ date_default_timezone_set('Asia/Singapore');
                 $sqlremovesignup="DELETE FROM signup WHERE SignUpID='$signupID'";
                 $resultremovesignup=mysqli_query($conn,$sqlremovesignup);
 
-                echo "You are now a legit user. Click <a href='http://localhost/orbital/signup.php'>here</a> to login.";
                 if ($_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] =='443'){
-                    echo "You are now a legit user. Click <a href='http://localhost/orbital/signup.php'>here</a> to login.";
+                    echo "<h1>Thank You </h1>";
+                    echo "<p>You're now a member of our big family. Start your wonderful journey now!</p>";
+                    echo "<a href='signup.php'><button>Start Your Journey</button></a>";
                 }
                 else{
-                    echo "You are now a legit user. Click <a href='http://localhost:8080/orbital/signup.php'>here</a> to login.";
+                    echo "<h1>Thank You </h1>";
+                    echo "<p>You're now a member of our big family. Start your wonderful journey now!</p>";
+                    echo "<a href='signup.php'><button>Start My Journey</button></a>";
                 }
             }
         }
@@ -84,5 +90,7 @@ date_default_timezone_set('Asia/Singapore');
         }
     }
 ?>
+</div>
+</div>
 </body>
 </html>

@@ -1,0 +1,48 @@
+.img{
+    background: url("../img/journey.jpg") no-repeat;
+    min-height: 100%;
+    min-width: 1024px;
+    height: auto;
+    width: 100%;
+    background-position: center;
+    background-size:cover;
+    position:fixed;
+    top:0;
+    left:0;
+}
+
+#background{
+    background: rgba(0,0,0,0.3); /*making a mask on the pic*/
+    text-align: center;
+    align-content: center;        
+    padding:160px;
+    margin:3%;
+    border:0;
+    border-radius: 20px;
+    font-style: oblique;
+    font-family: serif;
+    color:rgba(255, 234, 118, 0.979);
+}
+
+h1{
+    font-size: 50px;
+}
+
+p{
+    font-size:30px;
+}
+
+button{
+    border-radius: 10px;
+    padding: 10px;
+    padding-left: 40px;
+    padding-right: 40px;
+    background-color: #F3C693 ;
+    border-color: transparent;
+}
+
+button:hover{
+    background-color: #fff;
+}
+    
+    

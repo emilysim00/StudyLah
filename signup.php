@@ -148,7 +148,7 @@ date_default_timezone_set('Asia/Singapore');
 
                         <label>Current Mods:</label><br>
                             <textarea name="CurrentMod" cols="70" rows="5" id="textareabox" placeholder="e.g. CS2040C, CS2100" class="input-field" required></textarea>
-                        <input type="checkbox" class="check-box" required><label id="res">I agree to the terms and conditions.</label>
+                            <input type="checkbox" class="check-box" required><label id="res">I agree to the <a style="color: #fff" href="javascript:window.open('https://www.websitepolicies.com/policies/view/EZv3Hd3i', 'signup.php', 'width=400,height=400');">terms and conditions.</a></label>
                         <button type="submit" class="submit-btn" name="registerbutton">Register</button>
                         <!--Register PHP-->
                         <?php
