@@ -51,7 +51,8 @@ A web application, which includes a front-end user interface and also a back-end
 <br><br>
 <h2>Features to be completed [Milestones 2 & 3]</h2>
 <ul>
-  <li>Online Chatting Rooms/Message Box</li> 
+  <li>Online Chatting Rooms/Message Box<br>
+  -Users are able to chat/discuss on the online chatting platform with one another.</li> 
 <li>Scheduling of meet-ups
   <ul>
     <li>Helps to schedule an available date for all study partners to meet up </li>
