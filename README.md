@@ -13,11 +13,11 @@ We hope to provide a platform for NUS students (and professors) to connect and f
 The provided platform will allow the user to view the modules others have taken or are currently taking for matching to form small study groups. It also helps users to schedule a date which is available to all for the study session. Additionally, it offers a common shared tasklist which records individual tasks in the group so that not only can you keep track of what you have completed but also keep your friend in check to make sure that everyone is on the same page.
 
 <h2>User Stories</h2>
-1. As an individual who wants to expand their social network within the same industry (or possibly others), I want to be able to find and forge new friendships with people of the same courses, modules or interests easily.<br>
-2. As students who want to possibly study in a more efficient manner and exchange notes, I want to be able to form study groups.<br>
-3. As a student who has questions or troubles with regards to their modules e.g. assignments, I want to be able to clarify my doubt with people who I am more comfortable with (e.g. some students prefer asking other students instead of professors).<br>
-4. As a student who has questions regarding their courses/modules, I want to be able to get information about the modules through experiences from other students who have taken similar modules.<br>
-5. As a student who might be busy and have trouble setting a date for meetings, I want to be able to schedule a study date without intervening with my current schedule. <br>
+1. As an individual who wants to expand their social network within the same industry (or possibly others), I want to be able to find and forge new friendships with people of the same courses, modules or interests easily.<br><br<
+2. As students who want to possibly study in a more efficient manner and exchange notes, I want to be able to form study groups.<br><br>
+3. As a student who has questions or troubles with regards to their modules e.g. assignments, I want to be able to clarify my doubt with people who I am more comfortable with (e.g. some students prefer asking other students instead of professors).<br><br>
+4. As a student who has questions regarding their courses/modules, I want to be able to get information about the modules through experiences from other students who have taken similar modules.<br><br>
+5. As a student who might be busy and have trouble setting a date for meetings, I want to be able to schedule a study date without intervening with my current schedule. <br><br>
 6. As a student who might be forgetful and bad at keeping track of deadlines, I want to have a tasklist that helps me to sort my assignment deadline and plan out my time. Additionally, having someone to remind of the deadlines when near due.  
 
 <h2>Scope of Project</h2>
