@@ -52,9 +52,9 @@ A web application, which includes a front-end user interface and also a back-end
 <h2>Features to be completed [Milestones 2]</h2>
 <ul>
   <li>User portfolio<br>
-  - Gives users the ability to customize their own account e.g. upload profile picture, add bio, edit current modules etc.<br></li>
+  - Gives users the ability to customize their own account e.g. upload profile picture, add bio, edit current modules etc.</li><br>
   <li>Online Chatting Rooms/Message Box<br>
-  - Users are able to chat/discuss on the online chatting platform with one another.<br></li>
+  - Users are able to chat/discuss on the online chatting platform with one another.</li><br>
   <li>Scheduling of meet-ups<br>
     <ul>
       <li>Helps to schedule an available date for all study partners to meet up </li>
@@ -63,7 +63,7 @@ A web application, which includes a front-end user interface and also a back-end
         -Suggesting/Reminding what is needed to be brought [eg. CLB need student card] <br>
       </li>
     </ul>
-  </li>
+  </li><br>
   <li>Permissions within the web application<br>
     - Permission in the web application grants different user types the ability to access different parts of the pages. A new permission field in the user database table will be created in order to track the user permissions. Afterwhich, PHP is used to determine which pages users of different permissions can access. The following are the main user types/permissions within the web app:
     <ul>
@@ -78,7 +78,7 @@ A web application, which includes a front-end user interface and also a back-end
 <ul>
   <li>Online Forums<br>
   - All users are able to discuss on the main forum by creating a thread. <br>
-  - Exchange/ Comment on any topics they are interested in. <br></li>
+  - Exchange/ Comment on any topics they are interested in. </li><br>
   <li>Shared CheckList<br>
     - A common checklist shared with all study partners to help keep each other on track<br>
     - Each person will have their own column to keep track<br>
