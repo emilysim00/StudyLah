@@ -49,28 +49,43 @@ A web application, which includes a front-end user interface and also a back-end
 <h3>2. Log In </h3>
 <ul><li>User can log in to access the web application with his/her registered email and password. Once logged in, a session is created and only certain pages can be accessed by logged in users e.g. dashboard. </li></ul>
 <br><br>
-<h2>Features to be completed [Milestones 2 & 3]</h2>
+<h2>Features to be completed [Milestones 2]</h2>
 <ul>
+  <li>User portfolio<br>
+  - Gives users the ability to customize their own account e.g. upload profile picture, add bio, edit current modules etc.<br></li>
   <li>Online Chatting Rooms/Message Box<br>
-  -Users are able to chat/discuss on the online chatting platform with one another.</li> <br>
-<li>Scheduling of meet-ups
-  <ul>
-    <li>Helps to schedule an available date for all study partners to meet up </li>
-<li>Suggests study spots in school <br>
-- Suggest when is the peak period<br>
-  - Suggesting/Reminding what is needed to be brought [eg. CLB need student card] </li></ul><br></li>
-  <li>Shared CheckList<br>
-- A common checklist shared with all study partners to help keep each other on track<br>
-- Each person will have their own column to keep track<br>
-- Allows different filters e.g. sorting of deadlines [from earliest to latest]<br></li><br>
-  <li>Permissions within the web application</li>
-  - Permission in the web application grants different user types the ability to access different parts of the pages. A new permission field in the user database table will be created in order to track the user permissions. Afterwhich, PHP is used to determine which pages users of different permissions can access. The following are the main user types/permissions within the web app:
-  <ul>
-    <li><b>Public:</b> Able to access index/main, contact, sign up and login page. </li>
-    <li><b>Registered User:</b> Able to access whatever public users can access, in addition to their own dashboards and schedules, checklist, messages.</li>
-    <li><b>Admin:</b> Able to access everything except for sensitive information such as passwords.</li>
+  - Users are able to chat/discuss on the online chatting platform with one another.<br></li>
+  <li>Scheduling of meet-ups<br>
+    <ul>
+      <li>Helps to schedule an available date for all study partners to meet up </li>
+      <li>Suggests study spots in school <br>
+        -Suggest when is the peak period<br>
+        -Suggesting/Reminding what is needed to be brought [eg. CLB need student card] <br>
+      </li>
+    </ul>
+  </li>
+  <li>Permissions within the web application<br>
+    - Permission in the web application grants different user types the ability to access different parts of the pages. A new permission field in the user database table will be created in order to track the user permissions. Afterwhich, PHP is used to determine which pages users of different permissions can access. The following are the main user types/permissions within the web app:
+    <ul>
+      <li><b>Public:</b> Able to access index/main, contact, sign up and login page. </li>
+      <li><b>Registered User:</b> Able to access whatever public users can access, in addition to their own dashboards and schedules, checklist, messages.</li>
+      <li><b>Admin:</b> Able to access everything except for sensitive information such as passwords.</li>
+    </ul>
+  </li>
   </ul>
-</ul>
+<br><br>
+<h2>Features to be completed [Milestones 3]</h2>
+<ul>
+  <li>Online Forums<br>
+  - All users are able to discuss on the main forum by creating a thread. <br>
+  - Exchange/ Comment on any topics they are interested in. <br></li>
+  <li>Shared CheckList<br>
+    - A common checklist shared with all study partners to help keep each other on track<br>
+    - Each person will have their own column to keep track<br>
+    - Allows different filters e.g. sorting of deadlines [from earliest to latest]
+  </li>
+  </ul>
+
 <br><br><br><br>
 <h2>Tech Stack</h2> 
 1. HTML/CSS (Front-End Development) <br>
