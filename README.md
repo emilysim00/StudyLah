@@ -62,7 +62,7 @@ A web application, which includes a front-end user interface and also a back-end
   <li>Shared CheckList
 - A common checklist shared with all study partners to help keep each other on track<br>
 - Each person will have their own column to keep track<br>
-- Allows different filters e.g. sorting of deadlines [from earliest to latest]<br></li>
+- Allows different filters e.g. sorting of deadlines [from earliest to latest]<br></li><br>
   <li>Permissions within the web application</li>
   - Permission in the web application grants different user types the ability to access different parts of the pages. A new permission field in the user database table will be created in order to track the user permissions. Afterwhich, PHP is used to determine which pages users of different permissions can access. The following are the main user types/permissions within the web app:
   <ul>
