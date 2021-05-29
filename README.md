@@ -59,7 +59,7 @@ A web application, which includes a front-end user interface and also a back-end
 <li>Suggests study spots in school <br>
 - Suggest when is the peak period<br>
   - Suggesting/Reminding what is needed to be brought [eg. CLB need student card] </li></ul><br></li>
-  <li>Shared CheckList
+  <li>Shared CheckList<br>
 - A common checklist shared with all study partners to help keep each other on track<br>
 - Each person will have their own column to keep track<br>
 - Allows different filters e.g. sorting of deadlines [from earliest to latest]<br></li><br>
