@@ -72,9 +72,9 @@ A web application, which includes a front-end user interface and also a back-end
 5. XAMPP (to host services like Apache & MYSQL)<br>
 <br><br>
 <h2>Providing Evidence of creating databases with MySQL and using PHP</h2>
-We are using PHP and MySQL, to store and manage StudyLah’s data. <br>
+We are using PHP and MySQL, to store and manage StudyLah’s data. <br><br<
 When the user registers for a new account, a verification email containing the user’s unique verification token is sent to their registered email and a new sign up ID is created in the database. <br><br>
-PHPMailer API is used to send this email. Once verification is done, the user is now a legit user of the platform.<br>
+PHPMailer API is used to send this email. Once verification is done, the user is now a legit user of the platform.<br><br>
 In addition, upon clicking on the “register” button, PHP will query MYSQL to compare data in its database to ensure that there is no duplication of email when registering for an account.<br><br>
 When the user logs in as a registered user, MySQL compares the log-in credentials (user email and password) in order to check for authentication. Once logged in, the user session is created using PHP.<br>
 <br><br><br><br>
