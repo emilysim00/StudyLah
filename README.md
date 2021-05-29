@@ -57,12 +57,19 @@ A web application, which includes a front-end user interface and also a back-end
   <ul>
     <li>Helps to schedule an available date for all study partners to meet up </li>
 <li>Suggests study spots in school <br>
--Suggest when is the peak period<br>
-  -Suggesting/Reminding what is needed to be brought [eg. CLB need student card] </li></ul></li>
+- Suggest when is the peak period<br>
+  - Suggesting/Reminding what is needed to be brought [eg. CLB need student card] </li></ul></li>
   <li>Shared CheckList</li>
--A common checklist shared with all study partners to help keep each other on track<br>
--Each person will have their own column to keep track<br>
--Allows different filters e.g. sorting of deadlines [from earliest to latest]
+- A common checklist shared with all study partners to help keep each other on track<br>
+- Each person will have their own column to keep track<br>
+- Allows different filters e.g. sorting of deadlines [from earliest to latest]
+  <li>Permissions within the web application</li>
+  - Permission in the web application grants different user types the ability to access different parts of the pages. A new permission field in the user database table will be created in order to track the user permissions. Afterwhich, PHP is used to determine which pages users of different permissions can access. The following are the main user types/permissions within the web app:
+  <ul>
+    <li><b>Public:</b> Able to access index/main, contact, sign up and login page. </li>
+    <li><b>Registered User:</b> Able to access whatever public users can access, in addition to their own dashboards and schedules, checklist, messages.</li>
+    <li><b>Admin:</b> Able to access everything except for sensitive information such as passwords.</li>
+  </ul>
 </ul>
 <br><br><br><br>
 <h2>Tech Stack</h2> 
