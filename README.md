@@ -52,17 +52,17 @@ A web application, which includes a front-end user interface and also a back-end
 <h2>Features to be completed [Milestones 2 & 3]</h2>
 <ul>
   <li>Online Chatting Rooms/Message Box<br>
-  -Users are able to chat/discuss on the online chatting platform with one another.</li> 
+  -Users are able to chat/discuss on the online chatting platform with one another.<br></li> 
 <li>Scheduling of meet-ups
   <ul>
     <li>Helps to schedule an available date for all study partners to meet up </li>
 <li>Suggests study spots in school <br>
 - Suggest when is the peak period<br>
-  - Suggesting/Reminding what is needed to be brought [eg. CLB need student card] </li></ul></li>
+  - Suggesting/Reminding what is needed to be brought [eg. CLB need student card] </li></ul><br></li>
   <li>Shared CheckList</li>
 - A common checklist shared with all study partners to help keep each other on track<br>
 - Each person will have their own column to keep track<br>
-- Allows different filters e.g. sorting of deadlines [from earliest to latest]
+- Allows different filters e.g. sorting of deadlines [from earliest to latest]<br>
   <li>Permissions within the web application</li>
   - Permission in the web application grants different user types the ability to access different parts of the pages. A new permission field in the user database table will be created in order to track the user permissions. Afterwhich, PHP is used to determine which pages users of different permissions can access. The following are the main user types/permissions within the web app:
   <ul>
