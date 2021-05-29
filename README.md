@@ -1,15 +1,17 @@
 <h1>StudyLah</h1>
 
 <h2>Motivation</h2>
-In this covid semester, it is especially hard for students to connect with one another. Freshmans like us are not familiar with the school and hardly have any chance to make friends in school as the majority of the lectures and tutorials are held online. <br>
+In this covid semester, it is especially hard for students to connect with one another. Freshmans like us are not familiar with the school and hardly have any chance to make friends in school as the majority of the lectures and tutorials are held online. <br><br>
 
-While watching lectures, doing tutorials and assignments, you might be stuck with a question or are confused with certain concepts, it is inconvenient having no friends to ask and having to rely on online forums or emails to professors to ask a question. Such methods also have high time delays and might result in an individual feeling lonely and helpless, hence losing the motivation to study. <br>
+While watching lectures, doing tutorials and assignments, you might be stuck with a question or are confused with certain concepts, it is inconvenient having no friends to ask and having to rely on online forums or emails to professors to ask a question. Such methods also have high time delays and might result in an individual feeling lonely and helpless, hence losing the motivation to study. <br><br>
 
-Ever felt lazy or had no motivation to study? What if there is a platform for students studying the same modules to connect and discuss?
+Ever felt lazy or had no motivation to study? What if there is a platform for students studying the same modules to connect and discuss?<br><br>
+
 Thus, we wanted to create a web application, providing the students a platform to connect, expand their social circle and exchange their wisdom, helping one another in their studies, striving for better results. 
 
 <h2>Aim</h2>
-We hope to provide a platform for NUS students (and professors) to connect and forge friendship with each other through exchanging their knowledge in small study sessions. 
+We hope to provide a platform for NUS students (and professors) to connect and forge friendship with each other through exchanging their knowledge in small study sessions. <br><br>
+
 The provided platform will allow the user to view the modules others have taken or are currently taking for matching to form small study groups. It also helps users to schedule a date which is available to all for the study session. Additionally, it offers a common shared tasklist which records individual tasks in the group so that not only can you keep track of what you have completed but also keep your friend in check to make sure that everyone is on the same page.
 
 <h2>User Stories</h2>
@@ -24,7 +26,7 @@ The provided platform will allow the user to view the modules others have taken 
 A web application, which includes a front-end user interface and also a back-end database to store students/application data.
 
 <h2>How are we different from similar platforms?</h2>
-<b>Telegram Chat:</b> Telegram chat groups are large in size, users might find it hard to participate or form friendships. StudyLah allows users to form smaller groups and initiate conversation easier.<br>
+<b>Telegram Chat:</b> Telegram chat groups are large in size, users might find it hard to participate or form friendships. StudyLah allows users to form smaller groups and initiate conversation easier.<br><br>
 <b>Trello:</b> Corporate use trello more for tracking their employees’ projects status instead of allowing users to find teammates.
 
 <h2>Completed Features [Milestone 1]</h2>
@@ -71,13 +73,13 @@ A web application, which includes a front-end user interface and also a back-end
 
 <h2>Providing Evidence of creating databases with MySQL and using PHP</h2>
 We are using PHP and MySQL, to store and manage StudyLah’s data. <br>
-When the user registers for a new account, a verification email containing the user’s unique verification token is sent to their registered email and a new sign up ID is created in the database. <br>
+When the user registers for a new account, a verification email containing the user’s unique verification token is sent to their registered email and a new sign up ID is created in the database. <br><br>
 PHPMailer API is used to send this email. Once verification is done, the user is now a legit user of the platform.<br>
-In addition, upon clicking on the “register” button, PHP will query MYSQL to compare data in its database to ensure that there is no duplication of email when registering for an account.<br>
+In addition, upon clicking on the “register” button, PHP will query MYSQL to compare data in its database to ensure that there is no duplication of email when registering for an account.<br><br>
 When the user logs in as a registered user, MySQL compares the log-in credentials (user email and password) in order to check for authentication. Once logged in, the user session is created using PHP.<br>
 
 <h2>Providing Evidence of creating front-end development for the web application</h2>
-The user interfaces are designed using technology such as HTML, CSS and Javascript. <br>
+The user interfaces are designed using technology such as HTML, CSS and Javascript. <br><br>
 The user-interface is designed to be user-friendly where users are able to navigate around the web application to access the different features without any hassle. CSS is used extensively to improve the user experience e.g. animation and designs. Javascript is used to trigger some of the design (e.g onclick of a button). 
 
 <h2>Poster Link</h2>
