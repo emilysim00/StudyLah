@@ -52,17 +52,17 @@ A web application, which includes a front-end user interface and also a back-end
 <h2>Features to be completed [Milestones 2 & 3]</h2>
 <ul>
   <li>Online Chatting Rooms/Message Box<br>
-  -Users are able to chat/discuss on the online chatting platform with one another.<br></li> 
+  -Users are able to chat/discuss on the online chatting platform with one another.</li> <br>
 <li>Scheduling of meet-ups
   <ul>
     <li>Helps to schedule an available date for all study partners to meet up </li>
 <li>Suggests study spots in school <br>
 - Suggest when is the peak period<br>
   - Suggesting/Reminding what is needed to be brought [eg. CLB need student card] </li></ul><br></li>
-  <li>Shared CheckList</li>
+  <li>Shared CheckList
 - A common checklist shared with all study partners to help keep each other on track<br>
 - Each person will have their own column to keep track<br>
-- Allows different filters e.g. sorting of deadlines [from earliest to latest]<br>
+- Allows different filters e.g. sorting of deadlines [from earliest to latest]<br></li>
   <li>Permissions within the web application</li>
   - Permission in the web application grants different user types the ability to access different parts of the pages. A new permission field in the user database table will be created in order to track the user permissions. Afterwhich, PHP is used to determine which pages users of different permissions can access. The following are the main user types/permissions within the web app:
   <ul>
@@ -80,7 +80,7 @@ A web application, which includes a front-end user interface and also a back-end
 5. XAMPP (to host services like Apache & MYSQL)<br>
 <br><br>
 <h2>Providing Evidence of creating databases with MySQL and using PHP</h2>
-We are using PHP and MySQL, to store and manage StudyLah’s data. <br><br<
+We are using PHP and MySQL, to store and manage StudyLah’s data. <br><br>
 When the user registers for a new account, a verification email containing the user’s unique verification token is sent to their registered email and a new sign up ID is created in the database. <br><br>
 PHPMailer API is used to send this email. Once verification is done, the user is now a legit user of the platform.<br><br>
 In addition, upon clicking on the “register” button, PHP will query MYSQL to compare data in its database to ensure that there is no duplication of email when registering for an account.<br><br>
