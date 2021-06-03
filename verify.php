@@ -54,8 +54,8 @@ date_default_timezone_set('Asia/Singapore');
                 $signupemail=$rowfetchsignup['NUSEmail'];
                 
                 //now insert it into legit users database
-                $sqlinsertusers="INSERT INTO users (FullName,Gender,Password,Course,CurrentMod,YearOfStudy,ResidencyStatus,NUSEmail)
-                VALUES ('$signupfullname','$signupgender','$signuppassword','$signupcourse','$signupcurrentmod','$signupyearofstudy','$signupresidency','$signupemail');";
+                $sqlinsertusers="INSERT INTO users (FullName,Gender,Password,Course,CurrentMod,YearOfStudy,ResidencyStatus,NUSEmail, Permission)
+                VALUES ('$signupfullname','$signupgender','$signuppassword','$signupcourse','$signupcurrentmod','$signupyearofstudy','$signupresidency','$signupemail','Normal');";
                 $resultinsertusers=mysqli_query($conn,$sqlinsertusers);
 
                 //delete from signup and pending signup
