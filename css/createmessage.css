@@ -1,0 +1,53 @@
+#messagesection{
+    text-align:center;
+    display:block;
+    width:70%;
+    border-left:1px solid rgba(0, 0, 0, 0.3);
+    border-right:1px solid rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 10px 5px rgba(0, 0, 0, 0.3);
+    margin:0 auto;
+    background-color:white;
+    padding-top: 60px;
+}
+
+.bigtext{
+    padding:20px;
+    font-size:30px;
+    text-decoration:underline;
+}
+
+.hrstyle{
+    width:50%;
+    margin-top:15px;
+    margin-bottom:15px;
+}
+
+#newmessage:hover{
+    opacity:0.7;
+    cursor:pointer;
+}
+
+#usersTable{
+    margin-left:auto;
+    margin-right:auto;
+    padding:20px;
+}
+
+#usersTable tr,td{
+    padding:10px 15px 10px 15px;
+    border-bottom:1px solid black;
+}
+
+#userpic{
+    border-radius:50%;
+}
+
+.addfriendbutton:hover{
+    opacity:0.7;
+    cursor:pointer;
+}
+
+.hovercross:hover{
+    opacity:0.7;
+    cursor:pointer;
+}
