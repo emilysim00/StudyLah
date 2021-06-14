@@ -17,27 +17,15 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="img\studylah_logo.jpg" type="image/jpg">
-    <link rel="stylesheet" href="css\dashboard.css">
-    <link rel="stylesheet" href="css\navbar.css">
+    <link rel="icon" href="..\img\studylah_logo.jpg" type="image/jpg">
+    <link rel="stylesheet" href="..\css\dashboard.css">
+    <link rel="stylesheet" href="..\css\navbar.css">
     <title>StudyLah</title>
+
 </head>
 <body>
-    <nav>
-        <div class="logo">StudyLah</div>
-        <ul class="nav-links">
-            <li><a href="http://localhost:8080/orbital/dashboard.php">Home</a></li>
-            <li><a href="http://localhost:8080/orbital/chat.php">Chats</a></li>
-            <li><a href="http://localhost:8080/orbital/profile.php">Profile</a></li>
-            <li><a href="http://localhost:8080/orbital/logout.php">Logout</a></li>
-        </ul>
-        <div class="burger">
-            <div class="line1"></div>
-            <div class="line2"></div>
-            <div class="line3"></div>
-        </div>
-    </nav>
-    <script src="js\app.js"></script>
+    <!--navbar-->
+    <?php include('header.php');?>
     <div class="container">
         <div class="profile">
         <?php
@@ -62,10 +50,10 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                         //display profile picture
                         $profilepic=$rowgetuser['ProfilePic'];
                         if($profilepic=="" || $profilepic==NULL){
-                            echo "<div class=profile_pic><a href=\"http://localhost:8080/orbital/profile.php\"><img src=\"img/user.png\" alt=\"profilepic\"></a></div>";
+                            echo "<div class=profile_pic><a href=\"http://localhost:8080/orbital/profile.php\"><img src=\"..\img/user.png\" alt=\"profilepic\"></a></div>";
                         }
                         else{
-                            echo "<div class=profile_pic><a href=\"http://localhost:8080/orbital/profile.php\"><img src=\"userprofilepic/$profilepic\" alt=\"profilepic\"></a></div>";
+                            echo "<div class=profile_pic><a href=\"http://localhost:8080/orbital/profile.php\"><img src=\"../userprofilepic/$profilepic\" alt=\"profilepic\"></a></div>";
                         }
                         //display name, course and year
                         $fullname= $rowgetuser['FullName'];
@@ -83,15 +71,15 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
 
     
         <div class="chats">
-             <div class="chat_icon"><a href="schedule.php"><img src="img/chat.png" width="30" height="30" alt="notifications"></a></div>
-             <div class="header"><a href="chats.php">Notifications</a></div>
+             <div class="chat_icon"><a href="../schedule.php"><img src="../img/chat.png" width="30" height="30" alt="notifications"></a></div>
+             <div class="header"><a href="../chats.php">Notifications</a></div>
              <div class="notifications"> There is no notifications.</div>
         </div>
 
 
         <div class="schedule"> 
             <span><a href="schedule.php">Upcoming Meeting</a></span>
-            <div class="icon"><a href="schedule.php"><img src="img/calendar.png" width="30" height="30" alt="schedule"></a></div>
+            <div class="icon"><a href="schedule.php"><img src="../img/calendar.png" width="30" height="30" alt="schedule"></a></div>
             <div class="date">
                 <?php
                     date_default_timezone_set("Singapore");
@@ -126,9 +114,9 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
 
         <div class="checklist">
             <div class="heading">
-                <div class="check_icon"><a href="addtask.php"><img src=img\notes.png width="30" height="30"></a></div>
-                <div class="naming"><a href="addtask.php">To-Do-List</a></div>
-                <div class="add"><button class="open-button"name="add" id="add" onclick="openForm()"><img src=img\add.png width="30" height="30"></button></div>
+                <div class="check_icon"><a href="..\addtask.php"><img src=..\img\notes.png width="30" height="30"></a></div>
+                <div class="naming"><a href="..\addtask.php">To-Do-List</a></div>
+                <div class="add"><button class="open-button"name="add" id="add" onclick="openForm()"><img src=..\img\add.png width="30" height="30"></button></div>
             </div>
                 
             <div class="form-popup" id="myForm">
@@ -182,7 +170,7 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                             $result1=mysqli_query($conn,$sqlinsert1);
 
                             
-                        $url="http://localhost:8080/orbital/dashboard.php";
+                        $url="http://localhost:8080/orbital/dashboard.php/";
                         header('Location:' . $url);
                         
                         }
@@ -283,7 +271,7 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                                 
                             $conn->close();
 
-                            $url="http://localhost:8080/orbital/dashboard.php";
+                            $url="http://localhost:8080/orbital/dashboard.php/";
                             header('Location:' . $url);
 
                             }
@@ -295,11 +283,11 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
 
         <div class="news" id="new">
             <div class="images">
-                <img src="img/biz.jpg" alt="Business School">
-                <img src="img/bus.jpg" alt="Shuttle Bus">
-                <img src="img/de.jpg" alt="School of Design & Engineering">
-                <img src="img/utown.jpg" alt="U-Town">
-                <img src="img/soc.jpg" alt="School of Computing">
+                <img src="../img/biz.jpg" alt="Business School">
+                <img src="../img/bus.jpg" alt="Shuttle Bus">
+                <img src="../img/de.jpg" alt="School of Design & Engineering">
+                <img src="../img/utown.jpg" alt="U-Town">
+                <img src="../img/soc.jpg" alt="School of Computing">
             </div>
         </div>
 

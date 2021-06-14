@@ -24,20 +24,8 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
     <title>StudyLah</title>
 </head>
 <body>
-    <nav>
-        <div class="logo">StudyLah</div>
-        <ul class="nav-links">
-        <li><a href="http://localhost:8080/orbital/dashboard.php">Home</a></li>
-            <li><a href="http://localhost:8080/orbital/chat.php">Chats</a></li>
-            <li><a href="http://localhost:8080/orbital/profile.php">Profile</a></li>
-            <li><a href="http://localhost:8080/orbital/logout.php">Logout</a></li>
-        </ul>
-        <div class="burger">
-            <div class="line1"></div>
-            <div class="line2"></div>
-            <div class="line3"></div>
-        </div>
-    </nav>
+    <!--navbar-->
+    <?php include('header.php');?>
 
     <div class="checklist">
             <div class="heading">
