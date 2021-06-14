@@ -71,15 +71,15 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
 
     
         <div class="chats">
-             <div class="chat_icon"><a href="../schedule.php"><img src="../img/chat.png" width="30" height="30" alt="notifications"></a></div>
+             <div class="chat_icon"><a href="../message.php"><img src="../img/chat.png" width="30" height="30" alt="notifications"></a></div>
              <div class="header"><a href="../chats.php">Notifications</a></div>
              <div class="notifications"> There is no notifications.</div>
         </div>
 
 
         <div class="schedule"> 
-            <span><a href="schedule.php">Upcoming Meeting</a></span>
-            <div class="icon"><a href="schedule.php"><img src="../img/calendar.png" width="30" height="30" alt="schedule"></a></div>
+            <span><a href="../schedule.php">Upcoming Meeting</a></span>
+            <div class="icon"><a href="../schedule.php"><img src="../img/calendar.png" width="30" height="30" alt="schedule"></a></div>
             <div class="date">
                 <?php
                     date_default_timezone_set("Singapore");
