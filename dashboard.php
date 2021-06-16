@@ -90,27 +90,57 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                 ?>
             </div>
             <table id="schedule_list">
-                    <tr>
-                        <th>Event</th>
-                        <th>Location</th>
-                        <th>Date</th>
-                        <th>Time</th>
-                    </tr>
-                    <tr>
-                        <td>CS2100 Group</td>
-                        <td>Central Library</td>
-                        <td>29/07/2021</td>
-                        <td>0900-1000</td>
-                    </tr>
-                    <tr>
-                        <td>Lunch with The Girls</td>
-                        <td>The Deck</td>
-                        <td>07/08/2021</td>
-                        <td>1300-1400</td>
-                    </tr>  
+                <tr>
+                    <th>No.</th>
+                    <th>Event</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                </tr>
+                <?php 
+                    $servername = "localhost";
+                    $username = "root";
+                    $password = "";
+                    $dbname= "orbital";
+
+                    $mysqli = new mysqli($servername, $username, $password, $dbname); 
+                            
+                    if ($mysqli->connect_error) {
+                        die("Connection failed: " . $mysqli->connect_error);
+                    }
+                
+                    $useremail=$_SESSION['NUSEmail'];
+                    $sqlgetuser="SELECT * FROM users WHERE NUSEmail='$useremail'";
+                    $resultgetuser=mysqli_query($mysqli,$sqlgetuser);
+                
+                    if(mysqli_num_rows($resultgetuser) > 0){//valid
+                        while($rowgetuser=mysqli_fetch_array($resultgetuser)){
+                        $id=$rowgetuser['UserID'];
+                        }
+                    }
+
+                    $query = "SELECT * FROM events WHERE UserID='$id' ORDER BY start_event";
+
+                    if ($result = $mysqli->query($query)) {
+                        $number = 1;
+                        while ($row = $result->fetch_assoc()) {
+                            $title = $row["title"];
+                            $start = $row["start_event"];
+                            $end = $row["end_event"];
+                            echo'
+                                <tr> 
+                                    <td>'.$number.'</td> 
+                                    <td name="task">'.$title.'</td> 
+                                    <td name="module">'.$start.'</td> 
+                                    <td name="duedate">'.$end.'</td> 
+                                </tr>';
+                                    
+                            $number += 1;
+                        }
+                        $result->free();
+                    }
+                    ?>  
             </table>
         </div>
-
 
         <div class="checklist">
             <div class="heading">
@@ -187,7 +217,7 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                         <th>Module</th>
                         <th>Due Date</th>
                         <th>Deadline</th>
-                        <th>Complete Status</th>
+                        <th>Status</th>
                     </tr>
                     <?php 
                             $servername = "localhost";
@@ -211,7 +241,7 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                                 }
                             }
 
-                            $query = "SELECT * FROM tasklist WHERE UserID='$id'";
+                            $query = "SELECT * FROM tasklist WHERE UserID='$id' ORDER BY DueDate";
 
 
                             if ($result = $mysqli->query($query)) {

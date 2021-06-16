@@ -1,0 +1,23 @@
+.nav_contact{
+    background: transparent;
+    color: rgb(226,226,226);
+    border: none;
+    text-decoration: none;
+    letter-spacing: 3px;
+    font-weight: bold;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.nav_contact:hover{
+    color:wheat;
+}
+
+.end{
+    background:#5d4954;
+    float:right;
+    min-width: 100%;
+    width:100%;
+    text-align:center;
+    padding:15px;
+}
