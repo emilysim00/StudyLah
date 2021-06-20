@@ -87,7 +87,7 @@ tr, td{
     margin-right:10px;
 }
 </style>
-<body>
+<body style="font-family:'Inter',sans-serif;">
     <!--navbar-->
     <?php include('header.php');?>
     <!--profile section-->
