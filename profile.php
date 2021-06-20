@@ -20,12 +20,11 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
     <link rel="icon" href="img\studylah_logo.jpg" type="image/jpg">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css\header.css">
     <link rel="stylesheet" href="css\navbar.css">
     <link rel="stylesheet" href="css\profile.css">
     <title>StudyLah</title>
 </head>
-<body>
+<body style="font-family: 'Inter', sans-serif;">
     <!--navbar-->
     <?php include('header.php');?>
     <!--profile section-->
