@@ -22,118 +22,10 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css\navbar.css">
     <link rel="stylesheet" href="css\message.css">
+    <link rel="stylesheet" href="css\seemessage.css">
     <title>StudyLah</title>
 </head>
-<style>
-    #newmessage:hover{
-        opacity:0.7;
-        cursor:pointer;
-    }
-
-    #groupdetails{
-        margin-top:50px;
-    }
-
-    #grouppicture{
-        border-radius:50%;
-    }
-
-    #groupdetailsname{
-        padding:10px;
-
-    }
-
-    .currentusermessage{
-        display:block;
-        float:right;
-        width:200px;
-        padding:10px;
-        background-color:#92b4fc;
-        text-align:left;
-        border-radius:5px;
-    }
-
-    .otherusermessage{
-        display:block;
-        width:200px;
-        padding:10px;
-        background-color:white;
-        text-align:left;
-        border: 1px solid gray;
-        margin-top:20px;
-        border-radius:5px;
-    }
-
-    #chatbox{
-        clear:left;
-        clear:right;
-        margin-top:10px;
-        padding:20px;
-    }
-
-    .clearfloats{
-        clear:left;
-        clear:right;
-        padding:15px;
-    }
-
-    .thefinalchatbox{
-        width:75%;
-        display:block;
-        margin:0 auto;
-        max-height:300px;
-        overflow:scroll;
-        overflow-x:hidden;
-    }
-
-    .metext{
-        margin-bottom:5px;
-        font-size:10px;
-        color:#21489c;
-    }
-
-    .otherusertext{
-        margin-bottom:5px;
-        font-size:10px;
-        color:#e039e3;
-    }
-
-    .timestamp{
-        font-size:10px;
-        text-align:left;
-        color:gray;
-    }
-
-    #mychatbutton{
-        background-color:black;
-        color:white;
-        padding:5px;
-        border-radius:10px;
-        border:none;
-    }
-
-    #mychatbutton:hover{
-        opacity:0.7;
-        cursor:pointer;
-    }
-
-    .backbutton{
-        text-align:left;
-        padding:5px 20px;
-        font-size:15px;
-    }
-
-    .backbutton:hover{
-        cursor:pointer;
-        opacity:0.7;
-    }
-
-    .backpic{
-        vertical-align:middle;
-        margin-right:5px;
-    }
-    </style>
-<body>
+<body style="font-family:'Inter',sans-serif;">
     <!--navbar-->
     <?php include('header.php');?>
     <!--message section-->
@@ -191,6 +83,19 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                                     echo "<div><img src=\"grouppic/$grouppic\" width=\"100px\" height=\"100px\" id=\"grouppicture\"></div>";
                                 }
                                 echo "<div id = \"groupdetailsname\">$groupname</div>";
+                                //show members of the group
+                                $sqlshowmembers = "SELECT * FROM messages WHERE GroupID='$fetchgroup' GROUP BY NUSEmail";
+                                $resultshowmembers = mysqli_query($conn,$sqlshowmembers);
+
+                                echo "<div class=\"showgroupmembers\">";
+                                while($rowshowmembers = mysqli_fetch_array($resultshowmembers)){
+                                    $themembers = $rowshowmembers['FullName'];
+                                    echo "$themembers".",&nbsp";
+                                }
+                                echo "</div>";
+
+                                //add group schedule
+                                echo "<div><button id=\"addgroupschedule\">+ Add a group schedule</button><button id=\"viewgroupschedule\">View group schedule</button><br><br></div>";
                                 echo "<hr>";
                                 echo "</div>";
                                
@@ -301,7 +206,227 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
 
                 ?>
             </div>
+            
+            <!--Modal box for add group schedules-->
+            <div id="myModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <form method="post">
+                    <p style="font-weight:bold;text-decoration:underline;margin-bottom:15px;">Set a group schedule for everyone:<p>
+                    <p>Group: 
+                        <?php 
+
+                        $sqlgetgroup = "SELECT * FROM groups WHERE GroupID='$fetchgroup'";
+                        $resultgetgroup = mysqli_query($conn, $sqlgetgroup);
+                        while($rowgetgroup=mysqli_fetch_array($resultgetgroup)){
+                            $thegroupname = $rowgetgroup['GroupName'];
+                            echo $thegroupname;
+                            echo "<input type=\"text\" value=\"$thegroupname\" name=\"groupScheduleName\" required hidden>";
+                        }
+                        ?>
+                    </p>
+                    <table id="groupScheduleTable">
+                    <tr>
+                        <td>Title:</td>
+                        <td><input type="text" name="groupScheduleTitle" required></td>
+                    </tr>
+                    <tr>
+                        <td>Start: </td>
+                        <td><input type="date" name="groupScheduleStartDate" required><input type="time" name="groupScheduleStartTime" required></td>
+                    </tr>
+                    <tr>
+                        <td>End:</td> 
+                        <td><input type="date" name="groupScheduleEndDate" required><input type="time" name="groupScheduleEndTime" required></td>
+                    </tr>
+                    </table>
+                    <br>
+                    <button type="submit" name="groupScheduleSubmit" id="groupScheduleButton">Confirm Schedule</button>
+                </form>
+                <?php
+
+                //add into schedule
+                if(isset($_POST['groupScheduleSubmit'])){
+                    $groupscheduletitle = $_POST['groupScheduleName']." - ".$_POST['groupScheduleTitle'];
+                    $groupschedulestart = $_POST['groupScheduleStartDate']." ".$_POST['groupScheduleStartTime'];
+                    $groupscheduleend = $_POST['groupScheduleEndDate']." ".$_POST['groupScheduleEndTime'];
+                    $thefinalstarttime = date("Y-m-d H:i:s",strtotime($groupschedulestart));
+                    $thefinalendtime = date("Y-m-d H:i:s",strtotime($groupscheduleend));
+                    echo $thefinalendtime;
+
+                    //first get the people in the group uniquely
+                    $sqlgetpeoplefromgroup = "SELECT * FROM messages WHERE GroupID='$fetchgroup' GROUP BY NUSEmail";//or can grp by user id
+                    $resultgetpeoplefromgroup = mysqli_query($conn,$sqlgetpeoplefromgroup);
+
+                    while($rowgetpeoplefromgroup = mysqli_fetch_array($resultgetpeoplefromgroup)){
+                        $eachuserID = $rowgetpeoplefromgroup['UserID'];
+
+                        //now insert into everyone's schedule
+                        $sqlinsertintoschedule = "INSERT INTO schedule (UserID,title,start_event,end_event)
+                        VALUES ('$eachuserID','$groupscheduletitle','$thefinalstarttime','$thefinalendtime')";
+                        $resultinsertintoschedule = mysqli_query($conn,$sqlinsertintoschedule);
+                    }
+
+                    if ($_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] =='443'){
+                        header("Location: http://localhost/orbital/groupschedulesuccess.php?g=$fetchgroup");
+                    }
+                    else{
+                        header("Location: http://localhost:8080/orbital/groupschedulesuccess.php?g=$fetchgroup");
+                    }
+                }
+                ?>
+            </div>
+            </div>
+
+            <!--Modal for view schedules-->
+            <!-- The Modal -->
+            <div id="myModal2" class="modal">
+                <!-- Modal content -->
+                <div class="modal-content">
+                <span class="close2">&times;</span>
+                    <div>
+                        <?php
+                        //first get user id
+                        $sqlgetuserid = "SELECT * FROM users WHERE NUSEmail = '$currentuseremail'";
+                        $resultgetuserid= mysqli_query($conn,$sqlgetuserid);
+                        $tablenumbering = 0;
+                        while($rowgetuserid = mysqli_fetch_array($resultgetuserid)){
+                            $theid = $rowgetuserid['UserID'];
+
+                            //now fetch the schedule for the user ID
+                            $sqlgetschedule = "SELECT * FROM schedule WHERE UserID='$theid' ORDER BY start_event ASC";//order by date
+                            $resultgetschedule = mysqli_query($conn,$sqlgetschedule);
+                            echo "<div style=\"font-weight:bold;text-decoration:underline;padding:20px;\">Group Schedules</div>";
+
+                            if(mysqli_num_rows($resultgetschedule) > 0){//valid, got schedule
+                                echo "<table id=\"viewscheduletable\">";
+                                echo "<tr><td>No.</td><td>Title</td><td>Start Date</td><td>End Date</td><td>Action</td></tr>";
+                                while($rowgetschedule = mysqli_fetch_array($resultgetschedule)){
+                                    $gettitleschedule = $rowgetschedule['title'];
+
+                                    //fetch current group name first
+                                    $sqlfetchcurrentgroup = "SELECT * FROM groups WHERE GroupID='$fetchgroup'";
+                                    $resultfetchcurrentgroup = mysqli_query($conn,$sqlfetchcurrentgroup);
+
+                                    while($rowfetchcurrentgroup = mysqli_fetch_array($resultfetchcurrentgroup)){
+                                        $currgroupname = $rowfetchcurrentgroup['GroupName'];
+
+                                        //compare group name with title (get the title with the group name in it)
+
+                                        if (strpos($gettitleschedule, $currgroupname) !== false){// if exists in that string, then display that schedule
+                                            $tablenumbering += 1;
+                                            $thescheduletitle= $rowgetschedule['title'];
+                                            $starttime = $rowgetschedule['start_event'];
+                                            $starttimeformatted = date('d/m/Y H:i', strtotime($starttime));
+                                            $endtime = $rowgetschedule['end_event'];
+                                            $endtimeformatted = date('d/m/Y H:i', strtotime($endtime));
+                                            echo "<tr>";
+                                            echo "<td>$tablenumbering</td>
+                                            <td>$thescheduletitle</td>
+                                            <td>$starttimeformatted</td>
+                                            <td>$endtimeformatted</td>
+                                            <td>
+                                            <form method=\"post\"><input type=\"text\" value=\"$thescheduletitle\" name=\"doneScheduleName\" required hidden>
+                                            <button type=\"submit\" name=\"doneSchedule\" id=\"doneSchedule\">Done for everyone</button>
+                                            </form>
+                                            </td>";
+                                            echo "</tr>";
+                                        }
+                                    }
+                                }
+                                echo "</table>";
+                            }
+                            else{
+                                echo "<p>No schedules yet for this group...</p>";
+                            }
+                        }
+
+                        //done schedule button
+                        if(isset($_POST['doneSchedule'])){
+                            $doneschedulename = $_POST['doneScheduleName'];
+
+                            //get that event from database
+                            $sqlgetevent  = "SELECT * FROM schedule";
+                            $resultgetevent = mysqli_query($conn,$sqlgetevent);
+
+                            while($rowgetevent = mysqli_fetch_array($resultgetevent)){
+                                $theevent = $rowgetevent['title'];
+
+                                if ($theevent == $doneschedulename){//matches db, then delete
+                                    $gettheid = $rowgetevent['ScheduleID'];
+                                    $sqldeleteevent = "DELETE FROM schedule WHERE ScheduleID='$gettheid'";
+                                    $resultdeleteevent = mysqli_query($conn,$sqldeleteevent);
+
+                                    //redirect
+                                    if ($_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] =='443'){
+                                        header("Location: http://localhost/orbital/groupschedulesuccess.php?g=$fetchgroup");
+                                    }
+                                    else{
+                                        header("Location: http://localhost:8080/orbital/groupschedulesuccess.php?g=$fetchgroup");
+                                    }
+                                }
+                            }
+                        }
+                        ?>
+                    </div>
+                </div>
+            </div>
         </section>
     </section>
 </body>
+<script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("addgroupschedule");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal 
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    ////////////////=-------------------------modal 2 view schedule
+    // Get the modal
+    var modal2 = document.getElementById("myModal2");
+
+    // Get the button that opens the modal
+    var btn2 = document.getElementById("viewgroupschedule");
+
+    // Get the <span> element that closes the modal
+    var span2 = document.getElementsByClassName("close2")[0];
+
+    // When the user clicks the button, open the modal 
+    btn2.onclick = function() {
+        modal2.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span2.onclick = function() {
+        modal2.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal2) {
+            modal2.style.display = "none";
+        }
+    }
+</script>
 </html>
