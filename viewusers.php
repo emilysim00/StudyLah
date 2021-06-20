@@ -55,8 +55,7 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
 
 .hrstyle{
     width:50%;
-    margin-top:15px;
-    margin-bottom:15px;
+    margin:15px auto;
 }
 
 .centertable{
@@ -87,7 +86,7 @@ tr, td{
     opacity:0.7;
 }
     </style>
-<body>
+<body style="font-family:'Inter',sans-serif;">
     <!--navbar-->
     <?php include('header.php');?>
     <!--profile section-->
