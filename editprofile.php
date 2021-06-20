@@ -24,7 +24,7 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
     <link rel="stylesheet" href="css\editprofile.css">
     <title>StudyLah</title>
 </head>
-<body onload="populateSelectFields();">
+<body onload="populateSelectFields();" style="font-family: 'Inter', sans-serif;">
     <!--navbar-->
     <?php include('header.php');?>
     <!--profile section-->
@@ -82,11 +82,37 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                         $course= $rowgetuser['Course'];
                         echo "<tr><td>Course:</td>
                         <td><select id=\"editCourse\" name=\"editCourse\" required>
+                        <option value=\"Data Science and Economics\">Data Science and Economics</option>
+                        <option value=\"Food Science and Technology\">Food Science and Technology</option>
+                        <option value=\"Humanities Sciences\">Humanities Sciences</option>
+                        <option value=\"Pharmaceutical Science\">Pharmaceutical Science</option>
+                        <option value=\"Philosophy, Politics, Economics\">Philosophy, Politics, Economics</option>
+                        <option value=\"Architecture\">Architecture</option>
+                        <option value=\"Industrial Design\">Industrial Design</option>
+                        <option value=\"Landscape Architecture\">Landscape Architecture</option>
+                        <option value=\"Project & Facilities\">Project & Facilities</option>
+                        <option value=\"Real Estate\">Real Estate</option>
+                        <option value=\"Biomedical Engineering\">Biomedical Engineering</option>
+                        <option value=\"Civil Engineering\">Civil Engineering</option>
+                        <option value=\"Chemical Engineering\">Chemical Engineering</option>
+                        <option value=\"Engineering Science\">Engineering Science</option>
+                        <option value=\"Environmental Engineering\">Environmental Engineering</option>
+                        <option value=\"Electrical Engineering\">Electrical Engineering</option>
+                        <option value=\"Mechanical Engineering\">Mechanical Engineering</option>
+                        <option value=\"Industrial and Systems Engineering\">Industrial and Systems Engineering</option>
+                        <option value=\"Material Science Engineering\">Material Science Engineering</option>
+                        <option value=\"Business Administration (Accountancy)\">Business Administration (Accountancy)</option>
                         <option value=\"Information Security\">Information Security</option>
                         <option value=\"Computer Science\">Computer Science</option>
                         <option value=\"Information System\">Information System</option>
-                        <option value=\"Data Analytics\">Data Analytics</option>
-                        <option value=\"Business\">Business</option>
+                        <option value=\"Business Analytics\">Business Analytics</option>
+                        <option value=\"Computer Engineering\">Computer Engineering</option>
+                        <option value=\"Dentistry\">Dentistry</option>
+                        <option value=\"Undergraduate Law Programme\">Undergraduate Law Programme</option>
+                        <option value=\"Medicine\">Medicine</option>
+                        <option value=\"Nursing\">Nursing</option>
+                        <option value=\"Pharmacy\">Pharmacy</option>
+                        <option value=\"Music\">Music</option>
                         </select></td>";
                         echo "<input id=\"HidCourse\" type=\"text\" value=\"$course\" hidden>";
                         echo "</tr>";
@@ -159,10 +185,11 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
     <?php
      $nusemail= $_SESSION['NUSEmail'];
     if (isset($_POST['confirmbutton'])){
-        
+        $imagetoken = bin2hex(random_bytes(15));//Generate unique random token to append to imagename
         if(!$_FILES['newProfilePicture']['name']==""){ //something is uploaded
+            $filebasename= $imagetoken.basename($_FILES["newProfilePicture"]["name"]);
             $target_dir = $_SERVER['DOCUMENT_ROOT'].'/orbital/userprofilepic';//$_SERVER['DOCUMENT_ROOT'].'/wp-content/themes/dt-the7/trainerprofilepicture';
-            $target_file = $target_dir . '/' . basename($_FILES["newProfilePicture"]["name"]);
+            $target_file = $target_dir . '/' . $filebasename;
             $uploadOk = 1;
             $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
             $check = getimagesize($_FILES["newProfilePicture"]["tmp_name"]);
@@ -195,14 +222,14 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
             } 
             else {
                 if (move_uploaded_file($_FILES["newProfilePicture"]["tmp_name"], $target_file)) {
-                    echo "The file ". basename( $_FILES["newProfilePicture"]["name"]). " has been uploaded.";
+                    echo "The file ". $filebasename. " has been uploaded.";
                 } 
                 else {
                     echo "Sorry, there was an error uploading your file.";
                 }
             }
             
-            $imagename=basename( $_FILES["newProfilePicture"]["name"]);
+            $imagename=$filebasename;
             
             //end of image upload
             $sqlupdatepic="UPDATE users SET ProfilePic='$imagename' WHERE NUSEmail='$nusemail'";
