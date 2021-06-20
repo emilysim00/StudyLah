@@ -69,7 +69,7 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
         padding:5px 10px;
     }
     </style>
-<body>
+<body style="font-family: 'Inter', sans-serif;">
     <!--navbar-->
     <?php include('header.php');?>
     <!--message section-->
@@ -88,6 +88,8 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                     } 
                     ?>
                 </div>
+                <hr>
+                <div style="margin-bottom:30px;"></div>
                 <?php
                 $servername = "localhost";
                 $username = "root";
@@ -185,27 +187,6 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                     echo "<div>You have no chats/messages!</div>";
                 }
                 echo "</table>";
-
-                /*$sqlgetuser="SELECT * FROM users WHERE NUSEmail='$useremail'";
-                $resultgetuser=mysqli_query($conn,$sqlgetuser);
-
-                if(mysqli_num_rows($resultgetuser) > 0){//valid
-                    while($rowgetuser=mysqli_fetch_array($resultgetuser)){
-                        //display profile picture
-                       
-                    }
-                }
-                else{
-                    if ($_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] =='443'){
-                        $url="http://localhost/orbital/signup.php";
-                        header('Location:' . $url);
-                    }
-                    else{
-                        $url="http://localhost:8080/orbital/signup.php";
-                        header('Location:' . $url);
-                    } 
-                }*/
-
                 ?>
             </div>
         </section>
