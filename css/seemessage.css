@@ -1,0 +1,237 @@
+#newmessage:hover{
+    opacity:0.7;
+    cursor:pointer;
+}
+
+#groupdetails{
+    margin-top:50px;
+}
+
+#grouppicture{
+    border-radius:50%;
+}
+
+#groupdetailsname{
+    padding:10px;
+    font-size:25px;
+    font-weight:bold;
+}
+
+.currentusermessage{
+    display:block;
+    float:right;
+    width:200px;
+    padding:10px;
+    background-color:#92b4fc;
+    text-align:left;
+    border-radius:5px;
+}
+
+.otherusermessage{
+    display:block;
+    width:200px;
+    padding:10px;
+    background-color:white;
+    text-align:left;
+    border: 1px solid gray;
+    margin-top:20px;
+    border-radius:5px;
+}
+
+#chatbox{
+    clear:left;
+    clear:right;
+    margin-top:10px;
+    padding:20px;
+}
+
+.clearfloats{
+    clear:left;
+    clear:right;
+    padding:15px;
+}
+
+.thefinalchatbox{
+    width:75%;
+    display:block;
+    margin:0 auto;
+    max-height:300px;
+    overflow:scroll;
+    overflow-x:hidden;
+}
+
+.metext{
+    margin-bottom:5px;
+    font-size:10px;
+    color:#21489c;
+}
+
+.otherusertext{
+    margin-bottom:5px;
+    font-size:10px;
+    color:#e039e3;
+}
+
+.timestamp{
+    font-size:10px;
+    text-align:left;
+    color:gray;
+}
+
+#mychatbutton{
+    background-color:black;
+    color:white;
+    padding:5px;
+    border-radius:10px;
+    border:none;
+}
+
+#mychatbutton:hover{
+    opacity:0.7;
+    cursor:pointer;
+}
+
+.backbutton{
+    text-align:left;
+    padding:5px 20px;
+    font-size:15px;
+}
+
+.backbutton:hover{
+    cursor:pointer;
+    opacity:0.7;
+}
+
+.backpic{
+    vertical-align:middle;
+    margin-right:5px;
+}
+
+#addgroupschedule{
+    padding:5px 8px;
+    border-radius:5px;
+    background-color:black;
+    color:white;
+    border:none;
+}
+
+#addgroupschedule:hover{
+    cursor:pointer;
+    opacity:0.7;
+}
+
+#viewgroupschedule{
+    padding:5px 8px;
+    border-radius:5px;
+    background-color:black;
+    color:white;
+    border:none;
+    margin-left:10px;
+}
+
+#viewgroupschedule:hover{
+    cursor:pointer;
+    opacity:0.7;
+}
+
+/*modal box add schedule*/
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 70%;
+}
+
+/* The Close Button */
+.close, .close2 {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus, .close2:hover, .close2:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#groupScheduleTable{
+    margin-left:auto;
+    margin-right:auto;
+    padding:20px;
+}
+
+#groupScheduleTable tr, #groupScheduleTable td{
+    padding:15px;
+    text-align:left;
+    vertical-align:top;
+}
+
+#groupScheduleButton{
+    border:none;
+    border-radius:5px;
+    padding:5px 8px;
+    background-color:black;
+    color:white;
+}
+
+#groupScheduleButton:hover{
+    cursor:pointer;
+    opacity:0.7;
+}
+
+.showgroupmembers{
+    font-size:12px;
+    width:200px;
+    margin:15px auto;
+    text-align:left;
+    color:gray;
+}
+
+#messagesection{
+    padding-top:10px;
+}
+
+#viewscheduletable{
+    margin:0 auto;
+    padding:20px;
+    border-collapse:collapse;   
+}
+
+#viewscheduletable tr, #viewscheduletable td{
+    padding:20px;
+    text-align:left;
+    border:1px solid gray;
+}
+
+#doneSchedule{
+    border:none;
+    padding:5px 8px;
+    border-radius:5px;
+    background-color:black;
+    color:white;
+}
+
+#doneSchedule:hover{
+    cursor:pointer;
+    opacity:0.7;
+}
