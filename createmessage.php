@@ -24,13 +24,21 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
     <link rel="stylesheet" href="css\createmessage.css">
     <title>StudyLah</title>
 </head>
-<body>
+<body style="font-family:'Inter',sans-serif;">
     <!--navbar-->
     <?php include('header.php');?>
     <!--message section-->
     <section style="background-color:#424240;">
         <section id="messagesection">
             <div>
+                <?php
+                if ($_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] =='443'){
+                    echo "<div class=\"backbutton\" onclick=\"window.location.href='http://localhost/orbital/message.php'\"><img src=\"img/back.png\" width=\"15px\" height=\"15px\" class=\"backpic\">Back</div>";//back button
+                }
+                else{
+                    echo "<div class=\"backbutton\" onclick=\"window.location.href='http://localhost:8080/orbital/message.php'\"><img src=\"img/back.png\" width=\"15px\" height=\"15px\" class=\"backpic\">Back</div>";//back button
+                }
+                ?>
                 <div class="bigtext">Create Message</div>
                 <form method="post" enctype="multipart/form-data">
                     <div>Chat Name:</div>
@@ -92,9 +100,11 @@ $timestamp=date('Y-m-d H:i:s');//timestamp format
 if (isset($_POST['createGroup'])){
     $groupname= $_POST['groupName'];
     $imagename = "";
+    $imagetoken = bin2hex(random_bytes(15));//Generate unique random token to append to imagename
     if(!$_FILES['groupPic']['name']==""){ //something is uploaded
+        $filebasename = $imagetoken.basename($_FILES["groupPic"]["name"]);
         $target_dir = $_SERVER['DOCUMENT_ROOT'].'/orbital/grouppic';
-        $target_file = $target_dir . '/' . basename($_FILES["groupPic"]["name"]);
+        $target_file = $target_dir . '/' . $filebasename;
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
         $check = getimagesize($_FILES["groupPic"]["tmp_name"]);
@@ -127,14 +137,14 @@ if (isset($_POST['createGroup'])){
         } 
         else {
             if (move_uploaded_file($_FILES["groupPic"]["tmp_name"], $target_file)) {
-                echo "The file ". basename( $_FILES["groupPic"]["name"]). " has been uploaded.";
+                echo "The file ". $filebasename. " has been uploaded.";
             } 
             else {
                 echo "Sorry, there was an error uploading your file.";
             }
         }
         
-        $imagename=basename( $_FILES["groupPic"]["name"]);
+        $imagename=$filebasename;
     }
 
     //insert into groups
@@ -207,12 +217,12 @@ if (isset($_POST['createGroup'])){
     }
 
      // Redirect them to the message chat
-     if ($_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] =='443'){
+    if ($_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] =='443'){
         header("Location: http://localhost/orbital/seemessage.php?group=$maxgroup");
     }
     else{
         header("Location: http://localhost:8080/orbital/seemessage.php?group=$maxgroup");
-    } 
+    }
 }
 
 ?>
