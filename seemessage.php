@@ -50,6 +50,14 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                 //check whether person in group - authentication
                 $fetchgroup=$_GET['group'];
                 $currentuseremail=$_SESSION['NUSEmail'];
+                $fontcolorarrayusers = array();//fpr setting font color of different users
+                $fontcolors = array();
+
+                for ($x = 0; $x <= 300; $x++){//max number can be changed
+                    $rand = str_pad(dechex(rand(0x000000, 0xFFFFFF)), 6, 0, STR_PAD_LEFT);//generate 6 hex no.
+                    $addhashtag = '#'.$rand;
+                    array_push($fontcolors,$addhashtag);//to add in color - yellow, purple, red, blue, lightgreen, darkgreen
+                }
 
                 $sqlfetchgroup = "SELECT * FROM messages WHERE GroupID='$fetchgroup' AND NUSEmail='$currentuseremail'";
                 $resultfetchgroup=mysqli_query($conn,$sqlfetchgroup);
@@ -106,6 +114,7 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                                 while($rowgetmessages=mysqli_fetch_array($resultgetmessages)){
                                     $themessages = $rowgetmessages['Message'];
                                     $theuseremail = $rowgetmessages['NUSEmail'];
+
                                     $theusertiming = $rowgetmessages['Timing'];
                                     if ($themessages != "" || $themessages != NULL){//display if not empty message
                                         if($theuseremail == $currentuseremail){//current user: float message box to right
@@ -117,8 +126,16 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                                             echo "<div class=\"clearfloats\"></div>";
                                         }
                                         else{//other ppl : float message box to left
+                                            
+                                            //check if existing in font colors array
+                                            if(!in_array($theuseremail,$fontcolorarrayusers)){//not in array, then
+                                                array_push($fontcolorarrayusers,$theuseremail);//push into array
+                                            }
                                             echo "<div class=\"otherusermessage\">";
-                                            echo "<div class=\"otherusertext\">".$rowgetmessages['FullName']."</div>";
+                                            $arrayindex = array_search($theuseremail,$fontcolorarrayusers);
+                                            //echo $fontcolors[$arrayindex];
+                                            $thecolour = $fontcolors[$arrayindex];
+                                            echo "<div class=\"otherusertext\" style=\"color:$thecolour\">".$rowgetmessages['FullName']."</div>";
                                             echo $themessages;
                                             echo "<br><br><div class=\"timestamp\">$theusertiming</div>";
                                             echo "</div>";
