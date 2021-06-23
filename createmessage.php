@@ -24,6 +24,20 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
     <link rel="stylesheet" href="css\createmessage.css">
     <title>StudyLah</title>
 </head>
+<style>
+    #creategroupbutton{
+        border:none;
+        background-color:black;
+        color:white;
+        border-radius:5px;
+        padding:5px 8px;
+    }
+
+    #creategroupbutton:hover{
+        cursor:pointer;
+        opacity:0.7;
+    }
+</style>
 <body style="font-family:'Inter',sans-serif;">
     <!--navbar-->
     <?php include('header.php');?>
