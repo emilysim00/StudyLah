@@ -27,11 +27,12 @@ $user_id = $usr["UserID"];
 
 if(isset($_POST["title"]))
 {
-    $query = "INSERT INTO events (title, UserID, start_event, end_event) VALUES (:title, '$user_id', :start_event, :end_event)";
+    $query = "INSERT INTO schedule (title, UserID, venue, start_event, end_event) VALUES (:title, '$user_id', :venue, :start_event, :end_event)";
     $statement = $connect->prepare($query);
     $statement->execute(
         array(
             ':title'  => $_POST['title'],
+            ':venue'  => $_POST['venue'],
             ':start_event' => $_POST['start'],
             ':end_event' => $_POST['end']
         )

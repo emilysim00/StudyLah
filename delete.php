@@ -1,12 +1,12 @@
 <?php
 //delete.php
-    if(isset($_POST["id"]))
+    if(isset($_POST["ScheduleID"]))
     {
         $connect = new PDO('mysql:host=localhost;dbname=orbital', 'root', '');
-        $query = "DELETE from events WHERE id=:id";
+        $query = "DELETE from schedule WHERE ScheduleID=:ScheduleID";
         $statement = $connect->prepare($query);
         $statement->execute(
-            array(':id' => $_POST['id'])
+            array(':ScheduleID' => $_POST['ScheduleID'])
         );
     }
 ?>

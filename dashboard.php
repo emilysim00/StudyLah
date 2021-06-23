@@ -118,7 +118,7 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                         }
                     }
 
-                    $query = "SELECT * FROM events WHERE UserID='$id' ORDER BY start_event";
+                    $query = "SELECT * FROM schedule WHERE UserID='$id' ORDER BY start_event";
 
                     if ($result = $mysqli->query($query)) {
                         $number = 1;

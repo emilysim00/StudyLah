@@ -26,7 +26,7 @@ $user_id = $usr["UserID"];
 
 $data = array();
 
-$query = "SELECT * FROM events WHERE UserID='$user_id' ORDER BY id"; //only display user schedule
+$query = "SELECT * FROM schedule WHERE UserID='$user_id' ORDER BY ScheduleID"; //only display user schedule
 
 $statement = $connect->prepare($query);
 
@@ -37,8 +37,9 @@ $result = $statement->fetchAll();
 foreach($result as $row)
 {
  $data[] = array(
-  'id'   => $row["id"],
+  'ScheduleID'   => $row["ScheduleID"],
   'title'   => $row["title"],
+  'venue'   => $row["venue"],
   'start'   => $row["start_event"],
   'end'   => $row["end_event"]
  );

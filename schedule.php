@@ -62,11 +62,11 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                         var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm:ss");
                         var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD HH:mm:ss");
                         var title = event.title;
-                        var id = event.id;
+                        var ScheduleID = event.ScheduleID;
                         $.ajax({
                             url:"update.php",
                             type:"POST",
-                            data:{title:title, start:start, end:end, id:id},
+                            data:{title:title, start:start, end:end, ScheduleID:ScheduleID},
                             success:function(){
                                 calendar.fullCalendar('refetchEvents');
                                 alert('Event Update');
@@ -78,11 +78,11 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                         var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm:ss");
                         var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD HH:mm:ss");
                         var title = event.title;
-                        var id = event.id;
+                        var ScheduleID = event.ScheduleID;
                         $.ajax({
                             url:"update.php",
                             type:"POST",
-                            data:{title:title, start:start, end:end, id:id},
+                            data:{title:title, start:start, end:end, ScheduleID:ScheduleID},
                             success:function(){
                                 calendar.fullCalendar('refetchEvents');
                                 alert("Event Updated");
@@ -92,11 +92,11 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
 
                     eventClick:function(event){
                         if(confirm("Are you sure you want to remove it?")){
-                            var id = event.id;
+                            var ScheduleID = event.ScheduleID;
                             $.ajax({
                                 url:"delete.php",
                                 type:"POST",
-                                data:{id:id},
+                                data:{ScheduleID:ScheduleID},
                                 success:function(){
                                     calendar.fullCalendar('refetchEvents');
                                     alert("Event Removed");
