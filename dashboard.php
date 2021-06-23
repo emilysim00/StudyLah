@@ -330,7 +330,7 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
     <script>
          var indexValue = 0;
          function slideShow(){
-           setTimeout(slideShow, 2000);
+           setTimeout(slideShow, 2800);
            var x;
            const container = document.querySelector("#new")
            const img = container.querySelectorAll("div.images > img");
