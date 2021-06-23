@@ -41,13 +41,14 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                     selectHelper:true,
                     select: function(start, end, allDay){ //prompt to add new event
                         var title = prompt("Enter Event Title");
+                        var venue = prompt("Click <a href=\"recommendations.php\" >here<\a> to see recommendation.\nEnter Event Location");
                         if(title){
                             var start = $.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss"); //store current date and time
                             var end = $.fullCalendar.formatDate(end, "Y-MM-DD HH:mm:ss");
                             $.ajax({
                                 url:"insert.php",
                                 type:"POST",
-                                data:{title:title, start:start, end:end}, //sent data to server
+                                data:{title:title, venue:venue, start:start, end:end}, //sent data to server
                                 success:function(){
                                     calendar.fullCalendar('refetchEvents');
                                     alert("Event Added");
@@ -119,6 +120,10 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
         <div id="calendar"></div> <!--add calendar plug-->
     </div>
     <br/>
+
+    <div class="reco">
+        <a href="recommendations.php">See Location Recommendations</a>
+    </div>
 
     <div class="end">
         <button class="nav_contact" >Contact Us</button>
