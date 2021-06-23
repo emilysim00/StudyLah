@@ -64,11 +64,11 @@ date_default_timezone_set('Asia/Singapore');
                         if(mysqli_num_rows($resultfetchlogin)>0){//if valid login
                             $_SESSION['NUSEmail']=$loginemail;//create session
                             if ($_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] =='443'){
-                                $url="http://localhost/orbital/dashboard.php";
+                                $url="http://localhost/orbital/dashboard.php/";
                                 header('Location:' . $url);
                             }
                             else{
-                                $url="http://localhost:8080/orbital/dashboard.php";
+                                $url="http://localhost:8080/orbital/dashboard.php/";
                                 header('Location:' . $url);
                             }
                         }
