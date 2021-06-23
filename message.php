@@ -88,7 +88,6 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                     } 
                     ?>
                 </div>
-                <hr>
                 <div style="margin-bottom:30px;"></div>
                 <?php
                 $servername = "localhost";
