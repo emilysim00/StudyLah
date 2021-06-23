@@ -41,7 +41,7 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                     selectHelper:true,
                     select: function(start, end, allDay){ //prompt to add new event
                         var title = prompt("Enter Event Title");
-                        var venue = prompt("Enter Event Location");
+                        var venue = prompt("Enter Event Location\n ");
                         if(title){
                             var start = $.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss"); //store current date and time
                             var end = $.fullCalendar.formatDate(end, "Y-MM-DD HH:mm:ss");
@@ -109,21 +109,25 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
             });
    
         </script>
- </head>
-
+</head>
+<style>
+    .reco{
+        margin-left:50px;
+        margin-bottom:20px;
+    }
+</style>
 <body>
     <!--navbar-->
     <?php include('header.php');?>
 
     <br/>
+    <div class="reco">
+        <a href="recommendations.php">See Location Recommendations</a>
+    </div>
     <div class="container">
         <div id="calendar"></div> <!--add calendar plug-->
     </div>
     <br/>
-
-    <div class="reco">
-        <a href="recommendations.php">See Location Recommendations</a>
-    </div>
 
     <div class="end">
         <button class="nav_contact" >Contact Us</button>
