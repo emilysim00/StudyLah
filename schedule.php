@@ -111,9 +111,13 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
         </script>
 </head>
 <style>
-    .reco{
+   .reco{
         margin-left:50px;
         margin-bottom:20px;
+    }
+
+    .reco a{
+        color: #5d4954;
     }
 </style>
 <body>
