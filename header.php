@@ -29,10 +29,10 @@
             <?php
             //Home
             if ($_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] =='443'){
-                echo "<a href=\"http://localhost/orbital/dashboard.php\">Home</a>";
+                echo "<a href=\"http://localhost/orbital/dashboard.php/\">Home</a>";
             }
             else{
-                echo "<a href=\"http://localhost:8080/orbital/dashboard.php\">Home</a>";
+                echo "<a href=\"http://localhost:8080/orbital/dashboard.php/\">Home</a>";
             } 
             ?>
         </li>
