@@ -253,7 +253,7 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                                     $duedate = $row["DueDate"];
                                     $duetime = $row["DueTime"];
                                     $completion = $row["Completion"];
-                                    $taskid = $row["Numbering"];
+                                    $taskid = $row["TaskID"];
 
                                     echo '<form method = "post">
                                         <tr> 
@@ -291,7 +291,7 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                             }
                                 
                             // sql to delete a record
-                            $sql = "DELETE FROM tasklist WHERE Numbering=$taskidno";
+                            $sql = "DELETE FROM tasklist WHERE TaskID=$taskidno";
                                 
                             if ($conn->query($sql) === TRUE) {
                                 echo "Record deleted successfully";
