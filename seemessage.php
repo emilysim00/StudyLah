@@ -233,6 +233,10 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                         <td><input type="text" name="groupScheduleTitle" required></td>
                     </tr>
                     <tr>
+                        <td>Location:</td>
+                        <td><input type="text" name="groupScheduleLocation" required></td>
+                    </tr>
+                    <tr>
                         <td>Start: </td>
                         <td><input type="date" name="groupScheduleStartDate" required><input type="time" name="groupScheduleStartTime" required></td>
                     </tr>
@@ -249,6 +253,7 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                 //add into schedule
                 if(isset($_POST['groupScheduleSubmit'])){
                     $groupscheduletitle = $_POST['groupScheduleName']." - ".$_POST['groupScheduleTitle'];
+                    $groupschedulelocation = $_POST['groupScheduleLocation'];
                     $groupschedulestart = $_POST['groupScheduleStartDate']." ".$_POST['groupScheduleStartTime'];
                     $groupscheduleend = $_POST['groupScheduleEndDate']." ".$_POST['groupScheduleEndTime'];
                     $thefinalstarttime = date("Y-m-d H:i:s",strtotime($groupschedulestart));
@@ -263,8 +268,8 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                         $eachuserID = $rowgetpeoplefromgroup['UserID'];
 
                         //now insert into everyone's schedule
-                        $sqlinsertintoschedule = "INSERT INTO schedule (UserID,title,start_event,end_event)
-                        VALUES ('$eachuserID','$groupscheduletitle','$thefinalstarttime','$thefinalendtime')";
+                        $sqlinsertintoschedule = "INSERT INTO schedule (UserID,title, venue,start_event,end_event)
+                        VALUES ('$eachuserID','$groupscheduletitle','$groupschedulelocation','$thefinalstarttime','$thefinalendtime')";
                         $resultinsertintoschedule = mysqli_query($conn,$sqlinsertintoschedule);
                     }
 
@@ -301,7 +306,7 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
 
                             if(mysqli_num_rows($resultgetschedule) > 0){//valid, got schedule
                                 echo "<table id=\"viewscheduletable\">";
-                                echo "<tr><td>No.</td><td>Title</td><td>Start Date</td><td>End Date</td><td>Action</td></tr>";
+                                echo "<tr><td>No.</td><td>Title</td><td>Location</td><td>Start Date</td><td>End Date</td><td>Action</td></tr>";
                                 while($rowgetschedule = mysqli_fetch_array($resultgetschedule)){
                                     $gettitleschedule = $rowgetschedule['title'];
 
@@ -317,6 +322,7 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                                         if (strpos($gettitleschedule, $currgroupname) !== false){// if exists in that string, then display that schedule
                                             $tablenumbering += 1;
                                             $thescheduletitle= $rowgetschedule['title'];
+                                            $theschedulelocation = $rowgetschedule['venue'];
                                             $starttime = $rowgetschedule['start_event'];
                                             $starttimeformatted = date('d/m/Y H:i', strtotime($starttime));
                                             $endtime = $rowgetschedule['end_event'];
@@ -324,6 +330,7 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                                             echo "<tr>";
                                             echo "<td>$tablenumbering</td>
                                             <td>$thescheduletitle</td>
+                                            <td>$theschedulelocation</td>
                                             <td>$starttimeformatted</td>
                                             <td>$endtimeformatted</td>
                                             <td>
