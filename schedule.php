@@ -41,7 +41,7 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                     selectHelper:true,
                     select: function(start, end, allDay){ //prompt to add new event
                         var title = prompt("Enter Event Title");
-                        var venue = prompt("Click <a href=\"recommendations.php\" >here<\a> to see recommendation.\nEnter Event Location");
+                        var venue = prompt("Enter Event Location");
                         if(title){
                             var start = $.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss"); //store current date and time
                             var end = $.fullCalendar.formatDate(end, "Y-MM-DD HH:mm:ss");
