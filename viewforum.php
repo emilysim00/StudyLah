@@ -234,13 +234,17 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
 
                             while($rowgetuser = mysqli_fetch_array($resultgetuser)){
                                 $profilepic = $rowgetuser['ProfilePic'];
+                                $userid = $rowgetuser['UserID'];
+                                echo "<form method=\"post\" action=\"viewusers.php\" id=\"userform$userid\">";
                                 if($profilepic == NULL || $profilepic == ""){
-                                    echo "<td class=\"profalign\"><img src=\"img/user.png\" width=\"40px\" height=\"40px\" alt=\"profilepic\" class=\"groupprofilepic\"></td>";
+                                    echo "<td class=\"profalign\" onclick=\"document.getElementById('userform$userid').submit();\"><img src=\"img/user.png\" width=\"40px\" height=\"40px\" alt=\"profilepic\" class=\"groupprofilepic\"></td>";
                                 }
                                 else{
-                                    echo "<td class=\"profalign\"><img src=\"userprofilepic/$profilepic\" width=\"40px\" height=\"40px\" alt=\"profilepic\" class=\"groupprofilepic\"></td>";
+                                    echo "<td class=\"profalign\" onclick=\"document.getElementById('userform$userid').submit();\"><img src=\"userprofilepic/$profilepic\" width=\"40px\" height=\"40px\" alt=\"profilepic\" class=\"groupprofilepic\"></td>";
                                 }
+                                echo "<input type=\"number\" value=\"$userid\" name=\"theuserid\" hidden>";
                                 echo "<td><span style=\"font-size:15px;color:gray;\">".$rowgetuser['FullName']."&nbsp&nbsp ".$rowfetchforum['Timing']."</span>";
+                                echo "</form>";
                             }
 
                             echo "<br><br><span class=\"theforumtitle\">".$rowfetchforum['Title']."</span>
