@@ -149,6 +149,7 @@ tr, td{
                         <option value="4">Year 4</option>
                         <option value="5">Year 5</option>
                     </select>
+                    <button type="button" id="clearfilters">Clear Filters</button>
                 </div>
                 <br><br>
                 <?php
@@ -322,6 +323,28 @@ tr, td{
                     }
                 }	
             }
+        }
+    }
+
+    // Get the button that clear filters
+    var btn = document.getElementById("clearfilters");
+
+    // When the user clicks the button, clear filters
+    btn.onclick = function() {
+        document.getElementById("searchNameInput").value = "";
+        document.getElementById("searchModInput").value = "";
+        var dropDown1 = document.getElementById("searchCourseInput");
+        dropDown1.selectedIndex = 0;
+        var dropDown2 = document.getElementById("searchGenderInput");
+        dropDown2.selectedIndex = 0;
+        var dropDown3 = document.getElementById("searchYearInput");
+        dropDown3.selectedIndex = 0;
+
+        var table, tr, td, i;
+        table = document.getElementById("usersTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 1; i < tr.length; i++) {
+            tr[i].style.display = "";
         }
     }
     </script>
