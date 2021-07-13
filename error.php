@@ -46,6 +46,9 @@ date_default_timezone_set('Asia/Singapore');
                 else if($fetcherrortype == 'usernotfound'){
                     echo "<div>User not found :(!</div>";
                 }
+                else if($fetcherrortype == 'forumdoesnotexist'){
+                    echo "<div>Forum not found :(!</div>";
+                }
                 else{//general error
                     if ($_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] =='443'){
                         echo "<div>Oops, there seems to be an error! <br>Go back <a href='http://localhost/orbital/signup.php'>here.</a></div>";
