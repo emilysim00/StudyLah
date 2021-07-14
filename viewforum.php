@@ -143,6 +143,16 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
         opacity:0.7;
         cursor:pointer;
     }
+
+    .deletereplies:hover{
+        opacity:0.7;
+        cursor:pointer;
+    }
+
+    .deleteRepliesButton{
+        border:none;
+        background-color:white;
+    }
     </style>
 <body style="font-family: 'Inter', sans-serif;">
     <!--navbar-->
@@ -245,10 +255,11 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                                 echo "<input type=\"number\" value=\"$userid\" name=\"theuserid\" hidden>";
                                 echo "<td><span style=\"font-size:15px;color:gray;\">".$rowgetuser['FullName']."&nbsp&nbsp ".$rowfetchforum['Timing']."</span>";
                                 echo "</form>";
+                                echo "<br><br><span class=\"theforumtitle\">".$rowfetchforum['Title']."</span>
+                                <br><br>".$rowfetchforum['Message']."</td>";
                             }
 
-                            echo "<br><br><span class=\"theforumtitle\">".$rowfetchforum['Title']."</span>
-                            <br><br>".$rowfetchforum['Message']."</td>";
+                            
                             echo "</tr>";
                             echo "</table>";
                         }
@@ -291,8 +302,22 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                                 }
 
                                 echo "<td><span style=\"font-size:15px;color:gray;\">".$rowfetchreplyuser['FullName']."&nbsp&nbsp ".$rowfetchreply['Timing']."</span>";
+                                echo "<br><br>".$rowfetchreply['Message']."</td>";
+                                //delete button for replies
+                                if ($rowfetchreplyuser['NUSEmail'] == $_SESSION['NUSEmail']){
+                                    echo "<td>";
+                                    echo "<form method=\"post\">
+                                    <button type=\"submit\" name=\"deleteReply\" class=\"deleteRepliesButton\">
+                                    <img src=\"img/delete.png\" width=\"17px\" height=\"17px\" alt=\"deletereplies\" class=\"deletereplies\">
+                                    <input type=\"number\" value=\"".$rowfetchreply['ForumID']."\" name=\"deleteReplyForumID\" hidden required>
+                                    </button>
+                                    </form>";
+                                    echo "</td>";
+                                }
+                                else{
+                                    echo "<td></td>";
+                                }
                             }
-                            echo "<br><br>".$rowfetchreply['Message']."";
                             echo "<tr>";
                         }
                         echo "<table>";
@@ -335,6 +360,26 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                                 header('Location:' . $url);
                             }
                         }
+                    }
+
+                    //set delete reply
+                    if(isset($_POST['deleteReply'])){
+                        $theforumid = $_POST['deleteReplyForumID'];
+
+                        //remove reply content
+                        $sqlremovecontent = "DELETE FROM forum WHERE ForumID='$theforumid'";
+                        $resultremovecontent = mysqli_query($conn,$sqlremovecontent);
+
+                        //redirect
+                        if ($_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] =='443'){
+                            $url="http://localhost/orbital/viewforum.php?forum=$getforum";
+                            header('Location:' . $url);
+                        }
+                        else{
+                            $url="http://localhost:8080/orbital/viewforum.php?forum=$getforum";
+                            header('Location:' . $url);
+                        }
+
                     }
                 }
                 ?>
