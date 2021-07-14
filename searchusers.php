@@ -149,6 +149,7 @@ tr, td{
                         <option value="4">Year 4</option>
                         <option value="5">Year 5</option>
                     </select>
+                    <input type="text" id="searchCCAInput" onkeyup="searchCCA()" placeholder="Search by CCA...">
                     <button type="button" id="clearfilters">Clear Filters</button>
                 </div>
                 <br><br>
@@ -169,7 +170,7 @@ tr, td{
                 $sqlgetuser="SELECT * FROM users WHERE NOT NUSEmail='$currentuseremail' ORDER BY UserID ASC";//dont show myself
                 $resultgetuser=mysqli_query($conn,$sqlgetuser);
                 echo "<table class=\"centertable\" id=\"usersTable\">";
-                echo "<tr style=\"font-weight:bold;\"><td></td><td>Name</td><td>Gender</td><td>Course</td><td>Year of Study</td><td>Current Mods</td></tr>";
+                echo "<tr style=\"font-weight:bold;\"><td></td><td>Name</td><td>Gender</td><td>Course</td><td>Year of Study</td><td>Current Mods</td><td>CCA</td></tr>";
                 if(mysqli_num_rows($resultgetuser) > 0){//get users
                     while($rowgetuser=mysqli_fetch_array($resultgetuser)){
                         $userprofilepic=$rowgetuser['ProfilePic'];
@@ -195,6 +196,23 @@ tr, td{
                             echo "$getcurrmods<br>";
                         }
                         echo "</td>";
+
+                        //cca
+                        $currentcca = $rowgetuser['CCA'];
+                        if($currentcca == NULL || $currentcca == ""){
+                            echo "<td>";
+                            echo "No CCA";
+                            echo "</td>";
+                        }
+                        else{
+                            $currentccasexplode = preg_split('/[\ \n\,]+/', $currentcca);
+                            echo "<td>";
+                            for($eachcurrcca = 0; $eachcurrcca < count($currentccasexplode); $eachcurrcca++){
+                                $getcurrcca=$currentccasexplode[$eachcurrcca];
+                                echo "$getcurrcca<br>";
+                            }
+                            echo "</td>";
+                        }
                         echo "</tr>";
                         echo "<button type=\"submit\" name=\"eachuserprofile\" hidden></button>";
                         echo "</form>";
@@ -326,6 +344,27 @@ tr, td{
         }
     }
 
+    function searchCCA(){
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("searchCCAInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("usersTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 1; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[6]; //get CCA
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } 
+                
+                else {
+                    tr[i].style.display = "none";
+                }
+            }	
+        }
+    }
+
     // Get the button that clear filters
     var btn = document.getElementById("clearfilters");
 
@@ -339,6 +378,7 @@ tr, td{
         dropDown2.selectedIndex = 0;
         var dropDown3 = document.getElementById("searchYearInput");
         dropDown3.selectedIndex = 0;
+        document.getElementById("searchCCAInput").value = "";
 
         var table, tr, td, i;
         table = document.getElementById("usersTable");
