@@ -64,6 +64,31 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
         opacity:0.7;
         cursor:pointer;
     }
+    
+    .forumbuttons{
+        border:none;
+        padding:5px 7px;
+        margin-top:20px;
+    }
+
+    .left{
+        border-top-left-radius:10px;
+        border-bottom-left-radius:10px;
+        background-color:#5d4954;
+        color:lightgray;
+    }
+
+    .right{
+        border-top-right-radius:10px;
+        border-bottom-right-radius:10px;
+        color:#5d4954;
+        background-color:lightgray;
+    }
+
+    .forumbuttons:hover{
+        cursor:pointer;
+        opacity:0.7;
+    }
     </style>
 <body style="font-family: 'Inter', sans-serif;">
     <!--navbar-->
@@ -82,6 +107,18 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                         echo "<a href=\"http://localhost:8080/orbital/createforum.php\"><img src=\"img/pen.png\" width=\"20px\" height=\"20px\" alt=\"new forum\" id=\"newforum\"></a>";
                     } 
                 ?>
+                </div>
+                <div>
+                    <?php
+                    if ($_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] =='443'){
+                        echo "<button class=\"forumbuttons left\" type=\"button\" onclick=\"window.location.href='http://localhost/orbital/forum.php'\">All Forum</button>";
+                        echo "<button class=\"forumbuttons right\" type=\"button\" onclick=\"window.location.href='http://localhost/orbital/myforum.php'\">My Forum</button>";
+                    }
+                    else{
+                        echo "<button class=\"forumbuttons left\" type=\"button\" onclick=\"window.location.href='http://localhost:8080/orbital/forum.php'\">All Forum</button>";
+                        echo "<button class=\"forumbuttons right\" type=\"button\" onclick=\"window.location.href='http://localhost:8080/orbital/myforum.php'\">My Forum</button>";
+                    } 
+                    ?>
                 </div>
                 <div style="margin-bottom:30px;"></div>
                 <?php
