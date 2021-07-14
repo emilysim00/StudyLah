@@ -23,9 +23,10 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
     <link rel="stylesheet" href="css\navbar.css">
     <link rel="stylesheet" href="css\message.css">
     <link rel="stylesheet" href="css\seemessage.css">
+    <meta http-equiv="refresh" content="20" /><!--reload page every 20 seconds-->
     <title>StudyLah</title>
 </head>
-<body style="font-family:'Inter',sans-serif;">
+<body style="font-family:'Inter',sans-serif;" onload="updateScroll()">
     <!--navbar-->
     <?php include('header.php');?>
     <!--message section-->
@@ -110,7 +111,7 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                                 //now display the messages chat
                                 $sqlgetmessages = "SELECT * FROM messages WHERE GroupID='$fetchgroup' ORDER BY MessageID ASC";
                                 $resultgetmessages= mysqli_query($conn,$sqlgetmessages);
-                                echo "<div class =\"thefinalchatbox\">";
+                                echo "<div class =\"thefinalchatbox\" id=\"thefinalchatbox\">";
                                 while($rowgetmessages=mysqli_fetch_array($resultgetmessages)){
                                     $themessages = $rowgetmessages['Message'];
                                     $theuseremail = $rowgetmessages['NUSEmail'];
@@ -452,5 +453,13 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
             modal2.style.display = "none";
         }
     }
+
+    function updateScroll(){
+        var element = document.getElementById("thefinalchatbox");
+        element.scrollTop = element.scrollHeight;
+    }
+
+    setInterval(updateScroll,2500);
+
 </script>
 </html>
