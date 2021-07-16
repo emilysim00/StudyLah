@@ -72,7 +72,7 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                         if(mysqli_num_rows($resultfetchgroupdetails) > 0){//valid group, group exists
                             while($rowfetchgroupdetails=mysqli_fetch_array($resultfetchgroupdetails)){
                                 //first, change message status to seen
-                                $sqlupdateseen = "UPDATE messagenotifications SET Status='Seen' WHERE GroupID='$fetchgroup' AND NUSEmail='$currentuseremail'";
+                                $sqlupdateseen = "UPDATE notifications SET Status='Seen' WHERE GroupID='$fetchgroup' AND NUSEmail='$currentuseremail'";
                                 $resultupdateseen = mysqli_query($conn,$sqlupdateseen);
 
                                 $groupname = $rowfetchgroupdetails['GroupName'];
@@ -179,7 +179,7 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                                             $getotheremails=$rowgetothers['NUSEmail'];
 
                                             //now insert into notifications
-                                            $sqlinsertnotificationmessage = "INSERT INTO messagenotifications (GroupID,NUSEmail,NotificationType,Timing,Status,Message)
+                                            $sqlinsertnotificationmessage = "INSERT INTO notifications (GroupID,NUSEmail,NotificationType,Timing,Status,Message)
                                             VALUES ('$fetchgroup','$getotheremails','Message','$timestamp','Unseen','New message from $groupname')";
                                             $resultinsertnotificationmessage=mysqli_query($conn,$sqlinsertnotificationmessage);
                                         }
