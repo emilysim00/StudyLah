@@ -186,7 +186,43 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
         <div class="chats">
              <div class="chat_icon"><a href="../message.php"><img src="../img/chat.png" width="30" height="30" alt="notifications"></a></div>
              <div class="header"><a href="../chats.php">Notifications</a></div>
-             <div class="notifications"> There is no notifications.</div>
+             <div class="notifications">
+             <?php
+             
+             //get message notifications unseen
+             $sqlgetmessages = "SELECT * FROM notifications WHERE NUSEmail = '$useremail' AND (NotificationType = 'Message' OR NotificationType='NewAdded') AND Status= 'Unseen'";
+             $resultgetmessage = mysqli_query($conn,$sqlgetmessages);
+             $messagenotificationcount = 0;
+
+             if(mysqli_num_rows($resultgetmessage) > 0){//got notification message
+                while($rowgetmessage = mysqli_fetch_array($resultgetmessage)){
+                    $messagenotificationcount += 1;
+                }
+
+                echo "There are $messagenotificationcount new message(s).<br>";
+             }
+             else{
+                 echo "There are no new messages.<br>";
+             }
+
+             //get forum notifications unseen
+             $sqlgetforums = "SELECT * FROM notifications WHERE NUSEmail = '$useremail' AND NotificationType = 'Forum' AND Status='Unseen'";
+             $resultgetforums = mysqli_query($conn,$sqlgetforums);
+             $forumnotificationcount = 0;
+
+             if(mysqli_num_rows($resultgetforums) > 0){ //got forum notification
+                 while($rowgetforum = mysqli_fetch_array($resultgetforums)){
+                    $forumnotificationcount += 1;
+                 }
+
+                 echo "There are $forumnotificationcount new forum replies.<br>";
+             }
+             else{
+                 echo "There are no new forum replies. <br>";
+             }
+
+             ?>
+             </div>
         </div>
 
 
