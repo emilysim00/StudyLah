@@ -214,12 +214,16 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                     }
                 }
                 else{//ok
-            
+                    
                     $sqlfetchforum = "SELECT * FROM forum WHERE ForumID='$getforum' AND ReplyToID='0'";//main
                     $resultfetchforum = mysqli_query($conn, $sqlfetchforum);
 
                     if(mysqli_num_rows($resultfetchforum) > 0){//exist forum
                         while($rowfetchforum = mysqli_fetch_array($resultfetchforum)){
+
+                            //first, change notification status to seen
+                            $sqlupdateseen = "UPDATE notifications SET Status='Seen' WHERE GroupID='$getforum' AND NUSEmail='$useremail'";
+                            $resultupdateseen = mysqli_query($conn,$sqlupdateseen);
 
                             //show delete button for owners only
                             $theownerofforumid = $rowfetchforum['UserID'];
@@ -349,6 +353,24 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                             $sqlinsertreply = "INSERT INTO forum (UserID, NUSEmail,FullName,Title,Message,Timing,ReplyToID)
                             VALUES ('$userid','$useremail','$userfullname','-','$thereply','$timestamp','$getforum')";
                             $resultinsertreply = mysqli_query($conn,$sqlinsertreply);
+
+                            //update notifications
+                            $sqlgetowner = "SELECT * FROM forum WHERE ForumID='$getforum' OR ReplyToID='$getforum'";
+                            $resultgetowner = mysqli_query($conn,$sqlgetowner);
+
+                            while($rowgetowner = mysqli_fetch_array($resultgetowner)){
+                                $theownerofforum = $rowgetowner['NUSEmail'];
+                                $replyid = $rowgetowner['ReplyToID'];
+                            
+                                if(($theownerofforum == $useremail) && ($replyid == $getforum)){//duplicate of main owner noti
+                                    //do nothing
+                                }
+                                else{
+                                    $sqlinsertnotificationmessage = "INSERT INTO notifications (GroupID,NUSEmail,NotificationType,Timing,Status,Message)
+                                    VALUES ('$getforum','$theownerofforum','Forum','$timestamp','Unseen','New forum reply from $userfullname')";
+                                    $resultinsertnotificationmessage=mysqli_query($conn,$sqlinsertnotificationmessage);
+                                }
+                            }
 
                             //redirect
                             if ($_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] =='443'){
