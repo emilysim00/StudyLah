@@ -10,9 +10,21 @@
     cursor:pointer;
     opacity:0.7;
 }
+.opac:hover{
+    opacity:0.7;
+    cursor:pointer;
+}
 </style>
 <nav>
-    <div class="logo">StudyLah</div>
+    <?php
+    //dashboard
+    if ($_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] =='443'){
+        echo "<div class=\"logo opac\" onclick=\"window.location.href='http://localhost/orbital/dashboard.php/'\">Studylah</div>";
+    }
+    else{
+        echo "<div class=\"logo opac\" onclick=\"window.location.href='http://localhost:8080/orbital/dashboard.php/'\">Studylah</div>";
+    } 
+    ?>
     <ul class="nav-links">
         <li>
             <?php
@@ -22,6 +34,17 @@
             }
             else{
                 echo "<a href=\"http://localhost:8080/orbital/searchusers.php\"><img src=\"img/search-white.png\" width=\"20px\" height=\"20px;\" alt=\"Search\"></a>";
+            } 
+            ?>
+        </li>
+        <li>
+            <?php
+            //notifications
+            if ($_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] =='443'){
+                echo "<a href=\"http://localhost/orbital/notifications.php\"><img src=\"img/bell-white.png\" width=\"20px\" height=\"20px;\" alt=\"Notification\"></a>";
+            }
+            else{
+                echo "<a href=\"http://localhost:8080/orbital/notifications.php\"><img src=\"img/bell-white.png\" width=\"20px\" height=\"20px;\" alt=\"Notification\"></a>";
             } 
             ?>
         </li>
