@@ -12,6 +12,20 @@ date_default_timezone_set('Asia/Singapore');
     <link rel="stylesheet" href="css\signup.css">
     <title>StudyLah</title>
 </head>
+<style>
+.linkforgot{
+    text-align:center;
+    color:lightgray;
+    font-style:italic;
+    margin-top:10px;
+    font-size:12px;
+}
+
+.linkforgot:hover{
+    cursor:pointer;
+    opacity:0.7;
+}
+</style>
 <body id="loadfadein">
     <section>
         <div class="full-page">
@@ -37,6 +51,14 @@ date_default_timezone_set('Asia/Singapore');
                 <form id="login" class="input-group" method="post" enctype="multipart/form-data">
                     <input type="email" name="LoginStudentEmail" class="input-field" placeholder="User Email" required>
                     <input type="password" name="LoginUserPassword" class="input-field" minlength="12" placeholder="Enter Password" required>
+                    <?php
+                    if ($_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] =='443'){
+                        echo "<a class=\"linkforgot\" href=\"http://localhost/orbital/forgetpassword.php\">Forgot password</a>";
+                    }
+                    else{
+                        echo "<a class=\"linkforgot\" href=\"http://localhost:8080/orbital/forgetpassword.php\">Forgot password</a>";
+                    }
+                    ?>
                     <button type="submit" class="submit-btn" name="loginbutton">Log In</button>
                     <!--Login PHP-->
                     <?php
@@ -232,7 +254,7 @@ date_default_timezone_set('Asia/Singapore');
                                 $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
                                 $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
                                 $mail->Username   = 'chesterworden2@gmail.com';                     //SMTP username
-                                $mail->Password   = 'orbital2021';                               //SMTP password
+                                $mail->Password   = 'orbital2021emmus';                               //SMTP password
                                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         //Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
                                 $mail->Port       = 25;
 
