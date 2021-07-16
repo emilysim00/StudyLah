@@ -164,7 +164,7 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                             echo "</span></td>";
 
                             //display how many notifications for that user - unseen only
-                            $sqlgetnotifications = "SELECT * FROM messagenotifications WHERE GroupID='$groupid' AND NUSEmail='$useremail' AND Status='Unseen'";
+                            $sqlgetnotifications = "SELECT * FROM notifications WHERE GroupID='$groupid' AND NUSEmail='$useremail' AND Status='Unseen'";
                             $resultgetnotifications = mysqli_query($conn,$sqlgetnotifications);
                             $notificationcount = 0;
 
