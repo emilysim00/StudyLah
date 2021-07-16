@@ -188,7 +188,6 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
              <div class="header"><a href="../chats.php">Notifications</a></div>
              <div class="notifications">
              <?php
-             
              //get message notifications unseen
              $sqlgetmessages = "SELECT * FROM notifications WHERE NUSEmail = '$useremail' AND (NotificationType = 'Message' OR NotificationType='NewAdded') AND Status= 'Unseen'";
              $resultgetmessage = mysqli_query($conn,$sqlgetmessages);
@@ -199,10 +198,10 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                     $messagenotificationcount += 1;
                 }
 
-                echo "There are $messagenotificationcount new message(s).<br>";
+                echo "● There are $messagenotificationcount new message(s).<br>";
              }
              else{
-                 echo "There are no new messages.<br>";
+                 echo "● There are no new messages.<br>";
              }
 
              //get forum notifications unseen
@@ -215,10 +214,10 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                     $forumnotificationcount += 1;
                  }
 
-                 echo "There are $forumnotificationcount new forum replies.<br>";
+                 echo "● There are $forumnotificationcount new forum replies.<br>";
              }
              else{
-                 echo "There are no new forum replies. <br>";
+                 echo "● There are no new forum replies. <br>";
              }
 
              ?>
