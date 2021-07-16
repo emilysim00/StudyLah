@@ -102,13 +102,16 @@ date_default_timezone_set('Asia/Singapore');
                 </form>
 
                 <!--Sign Up-->
-                <form method="post" enctype="multipart/form-data" onsubmit="return checkValidation()" id="register" class="input-group">
+                <form method="post" enctype="multipart/form-data" onsubmit="return (checkValidation() && checkEmailValidation())" id="register" class="input-group">
                         <input type="text" name="fullname" class="input-field" placeholder="Full Name" required>
-                        <input type="email" name="StudentEmail" class="input-field" placeholder="NUS Email" required>
+                        <input type="email" name="StudentEmail" id="theStudentEmail" class="input-field" placeholder="NUS Email" onkeyup="checkEmail()" required>
+                        <div>
+                            <div id="alertonmismatchemail" style="padding:10px;color:red;font-size:10px;" hidden>NUS Email needs to be used!</div>
+                        </div>
                         <input type="password" class="input-field" name="UserPassword" id="UserPassword" minlength="12" placeholder="Enter Password" required>
                         <input type="password" class="input-field" name="ReUserPassword" id="ReUserPassword" minlength="12" onkeyup="checkPin()" placeholder="Re-Enter/Confirm Password" required>
                         <div>
-                            <div id="alertonmismatch" style="padding:10px;color:red" hidden>Your pin doesn't match!</div>
+                            <div id="alertonmismatch" style="padding:10px;color:red;font-size:10px;" hidden>Your pin doesn't match!</div>
                         </div>
 
                         <select name="Gender" class="input-field" required>
@@ -169,7 +172,7 @@ date_default_timezone_set('Asia/Singapore');
                         </select>
 
                         <label>Current Mods:</label><br>
-                            <textarea name="CurrentMod" cols="70" rows="5" id="textareabox" placeholder="e.g. CS2040C, CS2100" class="input-field" required></textarea>
+                            <textarea name="CurrentMod" cols="70" rows="2" id="textareabox" placeholder="e.g. CS2040C, CS2100" class="input-field" required></textarea>
                             <input type="checkbox" class="check-box" required><label id="res">I agree to the <a style="color: #fff" href="javascript:window.open('https://www.websitepolicies.com/policies/view/EZv3Hd3i', 'signup.php', 'width=400,height=400');">terms and conditions.</a></label>
                         <button type="submit" class="submit-btn" name="registerbutton">Register</button>
                         <!--Register PHP-->
@@ -224,63 +227,69 @@ date_default_timezone_set('Asia/Singapore');
                             }
                             else{
 
-                                //insert into sign up
-                                $sqlinsert1="INSERT INTO signup (FullName,Gender,Password,Course,CurrentMod,YearOfStudy,ResidencyStatus,NUSEmail)
-                                VALUES ('$signupname','$signupgender','$signuppassword','$signupcourse','$signupcurrentmod','$signupyear','$signupresidency','$signupemail');";
-                                $result1=mysqli_query($conn,$sqlinsert1);
+                                //now check for nus email by using strpos
+                                if(strpos($signupemail,"@u.nus.edu") == true){
+                                    //insert into sign up
+                                    $sqlinsert1="INSERT INTO signup (FullName,Gender,Password,Course,CurrentMod,YearOfStudy,ResidencyStatus,NUSEmail)
+                                    VALUES ('$signupname','$signupgender','$signuppassword','$signupcourse','$signupcurrentmod','$signupyear','$signupresidency','$signupemail');";
+                                    $result1=mysqli_query($conn,$sqlinsert1);
 
-                                //insert into pending sign up---------------------------------
-                                $sqlgetmaxsignupid="SELECT MAX(SignUpID) FROM signup";
-                                $resultgetmaxsignupid=mysqli_query($conn,$sqlgetmaxsignupid);
-                                
-                                //we don't know the sign up ID given, so we get them and insert into pendingsignup because of the SignUpID field
-                                while($rowgetmaxsignupid=mysqli_fetch_array($resultgetmaxsignupid)){
-                                    $themaxid=$rowgetmaxsignupid['MAX(SignUpID)'];
-                                }
-                                
-                                $token = bin2hex(random_bytes(50));//Generate unique random token of length 100
+                                    //insert into pending sign up---------------------------------
+                                    $sqlgetmaxsignupid="SELECT MAX(SignUpID) FROM signup";
+                                    $resultgetmaxsignupid=mysqli_query($conn,$sqlgetmaxsignupid);
+                                    
+                                    //we don't know the sign up ID given, so we get them and insert into pendingsignup because of the SignUpID field
+                                    while($rowgetmaxsignupid=mysqli_fetch_array($resultgetmaxsignupid)){
+                                        $themaxid=$rowgetmaxsignupid['MAX(SignUpID)'];
+                                    }
+                                    
+                                    $token = bin2hex(random_bytes(50));//Generate unique random token of length 100
 
-                                $sqlinsert2="INSERT INTO pendingsignup (SignUpID,VerificationToken)
-                                VALUES ('$themaxid','$token');";
-                                $result2=mysqli_query($conn,$sqlinsert2);
-                                
-                                //phpMailer part------------------------------------------------------
-                                $sendername='StudyLah';
-                                $emailsender='StudyLah@nus.com';
-                                $mail = new PHPMailer(true);
+                                    $sqlinsert2="INSERT INTO pendingsignup (SignUpID,VerificationToken)
+                                    VALUES ('$themaxid','$token');";
+                                    $result2=mysqli_query($conn,$sqlinsert2);
+                                    
+                                    //phpMailer part------------------------------------------------------
+                                    $sendername='StudyLah';
+                                    $emailsender='StudyLah@nus.com';
+                                    $mail = new PHPMailer(true);
 
-                                $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
-                                $mail->isSMTP();                                            //Send using SMTP
-                                $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
-                                $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-                                $mail->Username   = 'chesterworden2@gmail.com';                     //SMTP username
-                                $mail->Password   = 'orbital2021emmus';                               //SMTP password
-                                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         //Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
-                                $mail->Port       = 25;
+                                    $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+                                    $mail->isSMTP();                                            //Send using SMTP
+                                    $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+                                    $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+                                    $mail->Username   = 'chesterworden2@gmail.com';                     //SMTP username
+                                    $mail->Password   = 'orbital2021emmus';                               //SMTP password
+                                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         //Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
+                                    $mail->Port       = 25;
 
-                                //Deal with the email
-                                $mail->From = $emailsender; // from
-                                $mail->addReplyTo($emailsender, $sendername); // reply to address/name
+                                    //Deal with the email
+                                    $mail->From = $emailsender; // from
+                                    $mail->addReplyTo($emailsender, $sendername); // reply to address/name
 
-                                $mail->addAddress($signupemail); // to address
-                                $mail->setFrom($emailsender, $sendername);
+                                    $mail->addAddress($signupemail); // to address
+                                    $mail->setFrom($emailsender, $sendername);
 
-                                $mail->Subject = 'StudyLah Account'; // subject
-                                if ($_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] =='443'){
-                                    $mail->Body = 'Click here to verify your StudyLah account http://localhost/orbital/verify.php?token=' .$token.''; // body
+                                    $mail->Subject = 'StudyLah Account'; // subject
+                                    if ($_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] =='443'){
+                                        $mail->Body = 'Click here to verify your StudyLah account http://localhost/orbital/verify.php?token=' .$token.''; // body
+                                    }
+                                    else{
+                                        $url="http://localhost:8080/orbital/error.php?error=accountexist";
+                                        $mail->Body = 'Click here to verify your StudyLah account http://localhost:8080/orbital/verify.php?token=' .$token.''; // body
+                                    }
+                                    
+                                    if(!$mail->send())
+                                    { 
+                                        echo "<div style=\"color:red;font-size:15px;\">Failed</div>";
+                                        echo 'Mailer Error: ' . $mail->ErrorInfo;
+                                    }
+                                    else{
+                                        echo "<script type=\"text/javascript\">location.href = 'thankyou.php';</script>";
+                                    }
                                 }
                                 else{
-                                    $url="http://localhost:8080/orbital/error.php?error=accountexist";
-                                    $mail->Body = 'Click here to verify your StudyLah account http://localhost:8080/orbital/verify.php?token=' .$token.''; // body
-                                }
-                                
-                                if(!$mail->send())
-                                { 
-                                    echo "<div style=\"color:red;font-size:15px;\">Failed</div>";
-                                    echo 'Mailer Error: ' . $mail->ErrorInfo;
-                                }
-                                else{
-                                    echo "<script type=\"text/javascript\">location.href = 'thankyou.php';</script>";
+                                    echo "<div>Error with signing up! Invalid Email.</div>";
                                 }
                             }
                         }
@@ -308,6 +317,30 @@ date_default_timezone_set('Asia/Singapore');
 
             function checkValidation(){
                 if(!checkPin()){
+                    return false;
+                }
+                return true;
+            }
+
+            function checkEmail(){
+                var checkEmailValid = false;
+                theemail = document.getElementById("theStudentEmail").value;
+                var indexCheck = theemail.indexOf('@u.nus.edu');//check for nus email
+                if(indexCheck > -1){//valid nus email
+                    document.getElementById("alertonmismatchemail").setAttribute("hidden", "hidden");
+                    document.getElementById("alertonmismatchemail").classList.remove("invalid");
+                    checkEmailValid = true;
+                }
+                else{
+                    document.getElementById("alertonmismatchemail").removeAttribute("hidden");
+                    document.getElementById("alertonmismatchemail").className = "invalid";
+                    checkEmailValid = false;
+                }
+                return checkEmailValid;
+            }           
+
+            function checkEmailValidation(){
+                if(!checkEmail()){
                     return false;
                 }
                 return true;
