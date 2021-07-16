@@ -23,21 +23,7 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
     <link rel="stylesheet" href="css\navbar.css">
     <link rel="stylesheet" href="css\createmessage.css">
     <title>StudyLah</title>
-</head>
-<style>
-    #creategroupbutton{
-        border:none;
-        background-color:black;
-        color:white;
-        border-radius:5px;
-        padding:5px 8px;
-    }
-
-    #creategroupbutton:hover{
-        cursor:pointer;
-        opacity:0.7;
-    }
-</style>
+</head> 
 <body style="font-family:'Inter',sans-serif;">
     <!--navbar-->
     <?php include('header.php');?>
@@ -212,7 +198,7 @@ if (isset($_POST['createGroup'])){
                 $result2=mysqli_query($conn,$sqlinsert2);
 
                 //insert into other users notifications - just added "You are added into..."
-                $sqlinsertnotification = "INSERT INTO messagenotifications (GroupID,NUSEmail,NotificationType,Timing,Status,Message)
+                $sqlinsertnotification = "INSERT INTO notifications (GroupID,NUSEmail,NotificationType,Timing,Status,Message)
                 VALUES ('$maxgroup','$getmem','NewAdded','$timestamp','Unseen','You are added into $groupname')";
                 $resultinsertnotification= mysqli_query($conn,$sqlinsertnotification);
 
