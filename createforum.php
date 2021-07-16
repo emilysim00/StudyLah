@@ -122,9 +122,6 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                     }
                 }
 
-                $sqlgetgroups = "SELECT * FROM messages WHERE NUSEmail='$useremail' GROUP BY GroupID";//group by is no duplicate
-                $resultgetgroups = mysqli_query($conn,$sqlgetgroups);
-
                 ?>
                 </div>
             </div>
