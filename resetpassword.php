@@ -110,8 +110,10 @@ body{
                             header('Location:' . $url);
                         }
                         else{
+                            //hash password before placing into db
+                            $hashedpassword = md5($secondpassword);
                             //update password
-                            $sqlupdatepass = "UPDATE users SET Password = '$secondpassword' WHERE NUSEmail = '$nusemail'";
+                            $sqlupdatepass = "UPDATE users SET Password = '$hashedpassword' WHERE NUSEmail = '$nusemail'";
                             $resultupdatepass = mysqli_query($conn,$sqlupdatepass);
 
                             //delete from forogt password
