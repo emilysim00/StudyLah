@@ -65,15 +65,18 @@ date_default_timezone_set('Asia/Singapore');
                 $sqlremovesignup="DELETE FROM signup WHERE SignUpID='$signupID'";
                 $resultremovesignup=mysqli_query($conn,$sqlremovesignup);
 
+                //create session to sign up immediately after verification
+                $_SESSION['NUSEmail']=$signupemail;//create session
+
                 if ($_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] =='443'){
                     echo "<h1>Thank You </h1>";
                     echo "<p>You're now a member of our big family. Start your wonderful journey now!</p>";
-                    echo "<a href='signup.php'><button>Start Your Journey</button></a>";
+                    echo "<a href='http://localhost/orbital/dashboard.php/'><button>Start Your Journey</button></a>";
                 }
                 else{
                     echo "<h1>Thank You </h1>";
                     echo "<p>You're now a member of our big family. Start your wonderful journey now!</p>";
-                    echo "<a href='signup.php'><button>Start My Journey</button></a>";
+                    echo "<a href='http://localhost:8080/orbital/dashboard.php/'><button>Start My Journey</button></a>";
                 }
             }
         }
