@@ -79,8 +79,10 @@ date_default_timezone_set('Asia/Singapore');
 
                         $loginpassword=$_POST['LoginUserPassword'];
                         $loginemail=$_POST['LoginStudentEmail'];
+                        //hash password before checking
+                        $loginpasswordhash = md5($loginpassword);
 
-                        $sqlfetchlogin="SELECT * FROM users WHERE NUSEmail='$loginemail' AND Password='$loginpassword'";
+                        $sqlfetchlogin="SELECT * FROM users WHERE NUSEmail='$loginemail' AND Password='$loginpasswordhash'";
                         $resultfetchlogin=mysqli_query($conn,$sqlfetchlogin);
 
                         if(mysqli_num_rows($resultfetchlogin)>0){//if valid login
@@ -229,9 +231,12 @@ date_default_timezone_set('Asia/Singapore');
 
                                 //now check for nus email by using strpos
                                 if(strpos($signupemail,"@u.nus.edu") == true){
+                                    //hash password
+                                    $signuppasswordhash = md5($signuppassword);
+
                                     //insert into sign up
                                     $sqlinsert1="INSERT INTO signup (FullName,Gender,Password,Course,CurrentMod,YearOfStudy,ResidencyStatus,NUSEmail)
-                                    VALUES ('$signupname','$signupgender','$signuppassword','$signupcourse','$signupcurrentmod','$signupyear','$signupresidency','$signupemail');";
+                                    VALUES ('$signupname','$signupgender','$signuppasswordhash','$signupcourse','$signupcurrentmod','$signupyear','$signupresidency','$signupemail');";
                                     $result1=mysqli_query($conn,$sqlinsert1);
 
                                     //insert into pending sign up---------------------------------
