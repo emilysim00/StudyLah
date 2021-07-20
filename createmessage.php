@@ -99,6 +99,10 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
 $timestamp=date('Y-m-d H:i:s');//timestamp format
 if (isset($_POST['createGroup'])){
     $groupname= $_POST['groupName'];
+
+    //sanitize
+    $groupname = mysqli_real_escape_string($conn, $groupname);
+
     $imagename = "";
     $imagetoken = bin2hex(random_bytes(15));//Generate unique random token to append to imagename
     if(!$_FILES['groupPic']['name']==""){ //something is uploaded
