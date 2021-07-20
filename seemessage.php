@@ -158,6 +158,9 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                                     //insertinto messages
                                     $themessagetobesent = $_POST['sentmessage'];
 
+                                    //sanitize input
+                                    $themessagetobesent = mysqli_real_escape_string($conn,$themessagetobesent);
+
                                     //first get the user full name and id
                                     $sqlgetnameid = "SELECT * FROM users WHERE NUSEmail = '$currentuseremail'";
                                     $resultgetnameid = mysqli_query($conn,$sqlgetnameid);
@@ -277,6 +280,10 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                     $thefinalstarttime = date("Y-m-d H:i:s",strtotime($groupschedulestart));
                     $thefinalendtime = date("Y-m-d H:i:s",strtotime($groupscheduleend));
                     echo $thefinalendtime;
+
+                    //sanitize
+                    $groupscheduletitle = mysqli_real_escape_string($conn, $groupscheduletitle);
+                    $groupschedulelocation = mysqli_real_escape_string($conn,$groupschedulelocation);
 
                     //first get the people in the group uniquely
                     $sqlgetpeoplefromgroup = "SELECT * FROM messages WHERE GroupID='$fetchgroup' GROUP BY NUSEmail";//or can grp by user id
