@@ -242,35 +242,43 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
             }
         }
         if(!empty($_POST['editFullName'])){
-            $sqlupdateuser="UPDATE users SET FullName='".$_POST['editFullName']."' WHERE NUSEmail='$nusemail'";
+            $newfullname = mysqli_real_escape_string($conn, $_POST['editFullName']);//sanitize
+            $sqlupdateuser="UPDATE users SET FullName='$newfullname' WHERE NUSEmail='$nusemail'";
             $resultupdateuser=mysqli_query($conn,$sqlupdateuser);
         }
         if(!empty($_POST['editCourse'])){
-            $sqlupdateuser="UPDATE users SET Course='".$_POST['editCourse']."' WHERE NUSEmail='$nusemail'";
+            $newcourse = mysqli_real_escape_string($conn,$_POST['editCourse']);//sanitize
+            $sqlupdateuser="UPDATE users SET Course='$newcourse' WHERE NUSEmail='$nusemail'";
             $resultupdateuser=mysqli_query($conn,$sqlupdateuser);
         }
         if(!empty($_POST['editYearOfStudy'])){
-            $sqlupdateuser="UPDATE users SET YearOfStudy='".$_POST['editYearOfStudy']."' WHERE NUSEmail='$nusemail'";
+            $newyearofstudy = mysqli_real_escape_string($conn,$_POST['editYearOfStudy']);//sanitize
+            $sqlupdateuser="UPDATE users SET YearOfStudy='$newyearofstudy' WHERE NUSEmail='$nusemail'";
             $resultupdateuser=mysqli_query($conn,$sqlupdateuser);
         }
         if(!empty($_POST['editBio'])){
-            $sqlupdateuser="UPDATE users SET Bio='".$_POST['editBio']."' WHERE NUSEmail='$nusemail'";
+            $newBio = mysqli_real_escape_string($conn, $_POST['editBio']);//sanitize
+            $sqlupdateuser="UPDATE users SET Bio='$newBio' WHERE NUSEmail='$nusemail'";
             $resultupdateuser=mysqli_query($conn,$sqlupdateuser);
         }
         if(!empty($_POST['editResidency'])){
-            $sqlupdateuser="UPDATE users SET ResidencyStatus='".$_POST['editResidency']."' WHERE NUSEmail='$nusemail'";
+            $newResidency = mysqli_real_escape_string($conn,$_POST['editResidency']);//sanitize
+            $sqlupdateuser="UPDATE users SET ResidencyStatus='$newResidency' WHERE NUSEmail='$nusemail'";
             $resultupdateuser=mysqli_query($conn,$sqlupdateuser);
         }
         if(!empty($_POST['editCurrentMod'])){
-            $sqlupdateuser="UPDATE users SET CurrentMod='".$_POST['editCurrentMod']."' WHERE NUSEmail='$nusemail'";
+            $newCurrentMod = mysqli_real_escape_string($conn,$_POST['editCurrentMod']);//sanitize
+            $sqlupdateuser="UPDATE users SET CurrentMod='$newCurrentMod' WHERE NUSEmail='$nusemail'";
             $resultupdateuser=mysqli_query($conn,$sqlupdateuser);
         }
         if(!empty($_POST['editPastMod'])){
-            $sqlupdateuser="UPDATE users SET PastMod='".$_POST['editPastMod']."' WHERE NUSEmail='$nusemail'";
+            $newPastMod = mysqli_real_escape_string($conn,$_POST['editPastMod']);//sanitize
+            $sqlupdateuser="UPDATE users SET PastMod='$newPastMod' WHERE NUSEmail='$nusemail'";
             $resultupdateuser=mysqli_query($conn,$sqlupdateuser);
         }
         if(!empty($_POST['editCCA'])){
-            $sqlupdateuser="UPDATE users SET CCA='".$_POST['editCCA']."' WHERE NUSEmail='$nusemail'";
+            $newCCA = mysqli_real_escape_string($conn,$_POST['editCCA']);//sanitize
+            $sqlupdateuser="UPDATE users SET CCA='$newCCA' WHERE NUSEmail='$nusemail'";
             $resultupdateuser=mysqli_query($conn,$sqlupdateuser);
         }
 
