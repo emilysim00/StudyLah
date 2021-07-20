@@ -341,6 +341,10 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
 
                     if(isset($_POST['submitReply'])){
                         $thereply = $_POST['replyForum'];
+
+                        //sanitize
+                        $thereply = mysqli_real_escape_string($conn, $thereply);
+                        
                         //get curr user details
                         $sqlfetchuser = "SELECT * FROM users WHERE NUSEmail ='$useremail'";
                         $resultfetchuser = mysqli_query($conn,$sqlfetchuser);
