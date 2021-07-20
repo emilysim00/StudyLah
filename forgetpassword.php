@@ -86,6 +86,7 @@ body{
                         }
 
                         $studentemail=$_POST['StudentEmail'];
+                        $studentemail = mysqli_real_escape_string($conn,$studentemail); //sanitize
 
                         $sqlcheckemailexist = "SELECT * FROM users WHERE NUSEmail ='$studentemail'";
                         $resultcheckemailexist = mysqli_query($conn,$sqlcheckemailexist);
