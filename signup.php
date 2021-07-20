@@ -79,6 +79,10 @@ date_default_timezone_set('Asia/Singapore');
 
                         $loginpassword=$_POST['LoginUserPassword'];
                         $loginemail=$_POST['LoginStudentEmail'];
+
+                        //sanitize input
+                        $loginpassword = mysqli_real_escape_string($conn, $loginpassword);
+                        $loginemail = mysqli_real_escape_string($conn,$loginemail);
                         //hash password before checking
                         $loginpasswordhash = md5($loginpassword);
 
@@ -211,6 +215,16 @@ date_default_timezone_set('Asia/Singapore');
                             $signupyear=$_POST['YearOfStudy'];
                             $signupresidency=$_POST['Residency'];
                             $signupemail=$_POST['StudentEmail'];
+
+                            //sanitize input
+                            $signupname= mysqli_real_escape_string($conn,$signupname);
+                            $signupgender=mysqli_real_escape_string($conn,$signupgender);
+                            $signuppassword=mysqli_real_escape_string($conn,$signuppassword);
+                            $signupcourse=mysqli_real_escape_string($conn,$signupcourse);
+                            $signupcurrentmod=mysqli_real_escape_string($conn,$signupcurrentmod);
+                            $signupyear=mysqli_real_escape_string($conn,$signupyear);
+                            $signupresidency=mysqli_real_escape_string($conn,$signupresidency);
+                            $signupemail=mysqli_real_escape_string($conn,$signupemail);
 
 
                             //check for duplicate emails in system
