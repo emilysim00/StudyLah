@@ -104,7 +104,8 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                                 echo "</div>";
 
                                 //add group schedule
-                                echo "<div><button id=\"addgroupschedule\">+ Add a group schedule</button><button id=\"viewgroupschedule\">View group schedule</button><br><br></div>";
+                                echo "<p>Group Schedule</p><div class=\"lineseparator\"><button id=\"addgroupschedule\">+ Add a group schedule</button><button id=\"viewgroupschedule\">View group schedule</button></div>";
+                                echo "<p>Group Task</p><div class=\"lineseparator\"><button id=\"addgrouptask\">+ Add a group task</button><button id=\"viewgrouptask\">View group task</button></div><br><br>";
                                 echo "<hr>";
                                 echo "</div>";
                                
@@ -410,6 +411,183 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                     </div>
                 </div>
             </div>
+
+            <!--modal for add group task-->
+            <!-- The Modal -->
+            <div id="myModal3" class="modal">
+                <!-- Modal content -->
+                <div class="modal-content">
+                <span class="close3">&times;</span>
+                <form method="post">
+                    <p style="font-weight:bold;text-decoration:underline;margin-bottom:15px;">Set a group task for everyone:<p>
+                    <p>Group: 
+                        <?php 
+
+                        $sqlgetgroup2 = "SELECT * FROM groups WHERE GroupID='$fetchgroup'";
+                        $resultgetgroup2 = mysqli_query($conn, $sqlgetgroup2);
+                        while($rowgetgroup2=mysqli_fetch_array($resultgetgroup2)){
+                            $thegroupname2 = $rowgetgroup2['GroupName'];
+                            echo $thegroupname2;
+                            echo "<input type=\"text\" value=\"$thegroupname2\" name=\"groupTaskName\" required hidden>";
+                        }
+                        ?>
+                    </p>
+                    <table id="groupTaskTable">
+                    <tr>
+                        <td>Task Title:</td>
+                        <td><input type="text" name="groupTaskTitle" required></td>
+                    </tr>
+                    <tr>
+                        <td>Modules:</td>
+                        <td><input type="text" name="groupTaskModules" required></td>
+                    </tr>
+                    <tr>
+                        <td>Due: </td>
+                        <td><input type="date" name="groupTaskDueDate" required><input type="time" name="groupTaskDueTime" required></td>
+                    </tr>
+                    </table>
+                    <br>
+                    <button type="submit" name="groupTaskSubmit" id="groupTaskButton">Confirm Task</button>
+                </form>
+                <?php
+
+                //add into task
+                if(isset($_POST['groupTaskSubmit'])){
+                    $grouptasktitle = $_POST['groupTaskName']." - ".$_POST['groupTaskTitle'];
+                    $grouptaskmodules = $_POST['groupTaskModules'];
+                    $grouptaskduedate = date("Y-m-d", strtotime($_POST['groupTaskDueDate']));
+                    $grouptaskduetime = date("H:i:s", strtotime($_POST['groupTaskDueTime']));
+
+                    //sanitize
+                    $grouptasktitle = mysqli_real_escape_string($conn, $grouptasktitle);
+                    $grouptaskmodules = mysqli_real_escape_string($conn,$grouptaskmodules);
+                    $grouptasktitle = filter_var($grouptasktitle, FILTER_SANITIZE_STRING);
+                    $grouptaskmodules = filter_var($grouptaskmodules, FILTER_SANITIZE_STRING);
+
+                    //first get the people in the group uniquely
+                    $sqlgetpeoplefromgroup = "SELECT * FROM messages WHERE GroupID='$fetchgroup' GROUP BY NUSEmail";//or can grp by user id
+                    $resultgetpeoplefromgroup = mysqli_query($conn,$sqlgetpeoplefromgroup);
+
+                    while($rowgetpeoplefromgroup = mysqli_fetch_array($resultgetpeoplefromgroup)){
+                        $eachuserID = $rowgetpeoplefromgroup['UserID'];
+
+                        //now insert into everyone's task
+                        $sqlinsertintotask = "INSERT INTO tasklist (UserID,Tasks, Modules, DueDate, DueTime,Completion)
+                        VALUES ('$eachuserID','$grouptasktitle','$grouptaskmodules','$grouptaskduedate','$grouptaskduetime','0')";//0false
+                        $resultinsertintotask = mysqli_query($conn,$sqlinsertintotask);
+                    }
+
+                    if ($_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] =='443'){
+                        header("Location: http://localhost/orbital/groupschedulesuccess.php?g=$fetchgroup");
+                    }
+                    else{
+                        header("Location: http://localhost:8080/orbital/groupschedulesuccess.php?g=$fetchgroup");
+                    }
+                }
+                ?>
+                </div>
+
+            </div>
+
+            <!--modal for view group task-->
+            <!-- The Modal -->
+            <div id="myModal4" class="modal">
+                <!-- Modal content -->
+                <div class="modal-content">
+                <span class="close4">&times;</span>
+                <div>
+                <?php
+                //first get user id
+                $sqlgetuserid2 = "SELECT * FROM users WHERE NUSEmail = '$currentuseremail'";
+                $resultgetuserid2= mysqli_query($conn,$sqlgetuserid2);
+                $tablenumbering2 = 0;
+                while($rowgetuserid2 = mysqli_fetch_array($resultgetuserid2)){
+                    $theid2 = $rowgetuserid2['UserID'];
+
+                    //now fetch the task for the user ID
+                    $sqlgettask = "SELECT * FROM tasklist WHERE UserID='$theid2' ORDER BY DueDate ASC";//order by date
+                    $resultgettask = mysqli_query($conn,$sqlgettask);
+                    echo "<div style=\"font-weight:bold;text-decoration:underline;padding:20px;\">Group Task(s)</div>";
+
+                    if(mysqli_num_rows($resultgettask) > 0){//valid, got schedule
+                        echo "<table id=\"viewtasktable\">";
+                        echo "<tr><td>No.</td><td>Task</td><td>Module</td><td>Due Date</td><td>Due Time</td><td>Action</td></tr>";
+                        while($rowgettask = mysqli_fetch_array($resultgettask)){
+                            $gettitletask = $rowgettask['Tasks'];
+
+                            //fetch current group name first
+                            $sqlfetchcurrentgroup = "SELECT * FROM groups WHERE GroupID='$fetchgroup'";
+                            $resultfetchcurrentgroup = mysqli_query($conn,$sqlfetchcurrentgroup);
+
+                            while($rowfetchcurrentgroup = mysqli_fetch_array($resultfetchcurrentgroup)){
+                                $currgroupname = $rowfetchcurrentgroup['GroupName'];
+
+                                //compare group name with title (get the title with the group name in it)
+
+                                if (strpos($gettitletask, $currgroupname) !== false){// if exists in that string, then display that schedule
+                                    $tablenumbering2 += 1;
+                                    $thetasktitle= $rowgettask['Tasks'];
+                                    $thetaskmodules = $rowgettask['Modules'];
+                                    $duedate = $rowgettask['DueDate'];
+                                    $duedateformatted = date('d/m/Y', strtotime($duedate));
+                                    $duetime= $rowgettask['DueTime'];
+                                    $duetimeformatted = date('H:i', strtotime($duetime));
+                                    echo "<tr>";
+                                    echo "<td>$tablenumbering2</td>
+                                    <td>$thetasktitle</td>
+                                    <td>$thetaskmodules</td>
+                                    <td>$duedateformatted</td>
+                                    <td>$duetimeformatted</td>
+                                    <td>
+                                    <form method=\"post\"><input type=\"text\" value=\"$thetasktitle\" name=\"doneTaskName\" required hidden>
+                                    <button type=\"submit\" name=\"doneTask\" id=\"doneTask\">Done for everyone</button>
+                                    </form>
+                                    </td>";
+                                    echo "</tr>";
+                                }
+                            }
+                        }
+                        echo "</table>";
+                    }
+                    else{
+                        echo "<p>No task(s) yet for this group...</p>";
+                    }
+                }
+
+                //done task button
+                if(isset($_POST['doneTask'])){
+                    $donetaskname = $_POST['doneTaskName'];
+                    //sanitize
+                    $donetaskname = mysqli_real_escape_string($conn,$donetaskname);
+                    $donetaskname = filter_var($donetaskname, FILTER_SANITIZE_STRING);
+
+                    //get that event from database
+                    $sqlgetevent  = "SELECT * FROM tasklist";
+                    $resultgetevent = mysqli_query($conn,$sqlgetevent);
+
+                    while($rowgetevent = mysqli_fetch_array($resultgetevent)){
+                        $theevent = $rowgetevent['Tasks'];
+
+                        if ($theevent == $donetaskname){//matches db, then delete
+                            $gettheid = $rowgetevent['TaskID'];
+                            $sqldeleteevent = "DELETE FROM tasklist WHERE TaskID='$gettheid'";
+                            $resultdeleteevent = mysqli_query($conn,$sqldeleteevent);
+
+                            //redirect
+                            if ($_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] =='443'){
+                                header("Location: http://localhost/orbital/groupschedulesuccess.php?g=$fetchgroup");
+                            }
+                            else{
+                                header("Location: http://localhost:8080/orbital/groupschedulesuccess.php?g=$fetchgroup");
+                            }
+                        }
+                    }
+                }
+                ?>
+                </div>
+                </div>
+
+            </div>
         </section>
     </section>
 </body>
@@ -466,6 +644,58 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
             modal2.style.display = "none";
         }
     }
+
+    ////////////////---------------------------modal 3 add group task
+    var modal3 = document.getElementById("myModal3");
+
+    // Get the button that opens the modal
+    var btn3 = document.getElementById("addgrouptask");
+
+    // Get the <span> element that closes the modal
+    var span3 = document.getElementsByClassName("close3")[0];
+
+    // When the user clicks the button, open the modal 
+    btn3.onclick = function() {
+        modal3.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span3.onclick = function() {
+        modal3.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal3) {
+            modal3.style.display = "none";
+        }
+    }
+    /////////////////////////////////////---------------------modal 4 view group task
+    var modal4 = document.getElementById("myModal4");
+
+    // Get the button that opens the modal
+    var btn4 = document.getElementById("viewgrouptask");
+
+    // Get the <span> element that closes the modal
+    var span4 = document.getElementsByClassName("close4")[0];
+
+    // When the user clicks the button, open the modal 
+    btn4.onclick = function() {
+        modal4.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span4.onclick = function() {
+        modal4.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal4) {
+            modal4.style.display = "none";
+        }
+    }
+    /////////////////////////////////////////////----------------------------end of modal
 
     function updateScroll(){
         var element = document.getElementById("thefinalchatbox");
