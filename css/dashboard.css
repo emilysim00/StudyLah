@@ -1,452 +1,558 @@
+.logoutbutton{
+    vertical-align:middle;
+    background-color: #5d4954;
+    color:white;
+    border:none;
+}
+
+.logoutbutton:hover{
+    cursor:pointer;
+    opacity:0.7;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding-left: 0;
+}
+
+li {
+    color: #fff;
+    display: block;
+    float: left;
+    padding: 1rem;
+    position: relative;
+    text-decoration: none;
+    transition-duration: 0.5s;
+}
+
+li a {
+    color: #fff;
+}
+
+li:hover {
+    background: #424240;
+    cursor: pointer;
+}
+
+ul li ul {
+    background: #5d4954;
+    visibility: hidden;
+    opacity: 0;
+    min-width: 5rem;
+    position: absolute;
+    transition: all 0.5s ease;
+    margin-top: 1rem;
+    left: 0;
+    display: none;
+}
+
+ul li:hover > ul,
+ul li ul:hover {
+    visibility: visible;
+    opacity: 1;
+    display: block;
+}
+
+ul li ul li {
+    clear: both;
+    width: 100%;
+}
+
 *{
-    margin:0px;
-    padding:0px;
-    box-sizing:border-box;
+margin:0px;
+padding:0px;
+box-sizing:border-box;
 }
 
 .nav_contact{
-    background: transparent;
-    color: rgb(226,226,226);
-    border: none;
-    text-decoration: none;
-    letter-spacing: 3px;
-    font-weight: bold;
-    font-size: 14px;
-    font-family: 'Poppins', sans-serif;
+background: transparent;
+color: rgb(226,226,226);
+border: none;
+text-decoration: none;
+letter-spacing: 3px;
+font-weight: bold;
+font-size: 14px;
+font-family: 'Poppins', sans-serif;
 }
 
 .nav_contact:hover{
-    color:wheat;
+color:wheat;
 }
 
 .end{
-    background:#5d4954;
-    float:right;
-    min-width: 100%;
-    width:100%;
-    text-align:center;
-    padding:15px;
+background:#5d4954;
+float:right;
+min-width: 100%;
+width:100%;
+text-align:center;
+padding:15px;
 }
 
 .profile{
-    background: rgba(0,0,0,0.1);
-    float:left;
-    width:35%;
-    max-width: 35%;
+background: rgba(0,0,0,0.1);
+float:left;
+width:35%;
+max-width: 35%;
 }
 
 .profile_pic{
-    padding:25px;
-    width:45%;
-    float: left;
-    padding-right:0px;
-    padding-left:10px;
+padding:25px;
+width:45%;
+float: left;
+padding-right:0px;
+padding-left:10px;
 }
 
 .profile_pic img{
-    width: 200px;
-    height: 200px;
-    overflow: hidden;
-    border-radius: 50%;
-    display:inline-block;
+width: 200px;
+height: 200px;
+overflow: hidden;
+border-radius: 50%;
+display:inline-block;
 }
 
 .info{
-    text-align: left;
-    padding-top: 50px;
-    padding-right: 10px;
-    font-weight: bold;
-    font-size: 16px;
-    font-family: 'Poppins', sans-serif;
-    line-height: 40px;
+text-align: left;
+padding-top: 50px;
+padding-right: 10px;
+font-weight: bold;
+font-size: 16px;
+font-family: 'Poppins', sans-serif;
+line-height: 40px;
 }
 
 .info a{
-    text-decoration: none;
-    color:black;
+text-decoration: none;
+color:black;
 }
 
 .info a:hover{
-    color:#5d4954;
-    font-weight: bolder;
-    font-size:14px;
+color:#5d4954;
+font-weight: bolder;
+font-size:14px;
 }
 
 .checklist{
-    float: left;
-    width: 35%;
-    font-family: 'Poppins', sans-serif;
+float: left;
+width: 35%;
+font-family: 'Poppins', sans-serif;
 }
 .heading{
-    padding-bottom:80px;
+padding-bottom:80px;
 }
 .check_icon{
-    float:left;
-    padding:20px;
-    padding-right:10px;
+float:left;
+padding:20px;
+padding-right:10px;
 }
 
 .add{
-    float:right;
-    padding:20px;
+float:right;
+padding:20px;
 }
 
 .add button{
-    text-decoration: none;
-    background:transparent;
+text-decoration: none;
+background:transparent;
 }
 
 .form{
-    text-align: left;
-    padding:20px;
+text-align: left;
+padding:20px;
 }
 
 .naming{
-    text-decoration: none;
-    padding-top:30px;
-    font-weight: bold;
-    font-family: 'Poppins', sans-serif;
-    font-size: 16px;
-    width:80px;
-    margin:0;
-    float:left;
+text-decoration: none;
+padding-top:30px;
+font-weight: bold;
+font-family: 'Poppins', sans-serif;
+font-size: 16px;
+width:80px;
+margin:0;
+float:left;
 }
 
 .naming a{
-    text-decoration: none;
-    color:black;
+text-decoration: none;
+color:black;
 }
 
 .naming a:hover{
-    color:#5d4954;
+color:#5d4954;
 }
 
 /* Button used to open the contact form - fixed at the bottom of the page */
 .open-button {
-    color: white;
-    border: none;
-    cursor: pointer;
-    opacity: 0.8;
-  }
-  
-  /* The popup form - hidden by default */
+color: white;
+border: none;
+cursor: pointer;
+opacity: 0.8;
+}
+
+/* The popup form - hidden by default */
 .form-popup {
-    display: none;
-    align-content: center;
-  }
-  
-  /* Add styles to the form container */
+display: none;
+align-content: center;
+}
+
+/* Add styles to the form container */
 .form-container {
-    max-width: 500px;
-    align-content: center;
-    margin:auto;
-    text-align: left;
-    padding:20px;
-    border: 1px solid black;
-  }
-  
-  /* Full-width input fields */
+max-width: 500px;
+align-content: center;
+margin:auto;
+text-align: left;
+padding:20px;
+border: 1px solid black;
+}
+
+/* Full-width input fields */
 .form-container input[type=text] {
-    width: 100%;
-    padding: 15px;
-    margin: 5px 0 22px 0;
-    border: none;
-    background: #f1f1f1;
+width: 100%;
+padding: 15px;
+margin: 5px 0 22px 0;
+border: none;
+background: #f1f1f1;
 }
 
 h2{
-    text-align: center;
+text-align: center;
 }
-  
-  /* Set a style for the submit/login button */
+
+/* Set a style for the submit/login button */
 .form-container button {
-    background-color: #5d4954;
-    align-content: flex-end;
-    text-align: center;
-    color: white;
-    padding: 10px;
-    border: none;
-    cursor: pointer;
-    opacity: 1;
-  }
-  
-  /* Add a red background color to the cancel button */
+background-color: #5d4954;
+align-content: flex-end;
+text-align: center;
+color: white;
+padding: 10px;
+border: none;
+cursor: pointer;
+opacity: 1;
+}
+
+/* Add a red background color to the cancel button */
 .form-container .cancel {
-    background-color: rgba(255, 0, 0, 0.616);
-  }
-  
-  /* Add some hover effects to buttons */
+background-color: rgba(255, 0, 0, 0.616);
+}
+
+/* Add some hover effects to buttons */
 .form-container button:hover {
-    opacity: 0.8;
-  }
+opacity: 0.8;
+}
 
 #checklist th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: left;
-    background-color: #5d4954;
-    color: white;
+padding-top: 12px;
+padding-bottom: 12px;
+text-align: left;
+background-color: #5d4954;
+color: white;
 }
 
 #checklist td, #checklist th {
-    border: 1px solid #ddd;
-    padding: 8px;
-    word-wrap: break-word;
-  }
-  
+border: 1px solid #ddd;
+padding: 8px;
+word-wrap: break-word;
+}
+
 #checklist tr:nth-child(even){
-      background-color: #f2f2f2;
-    }
+  background-color: #f2f2f2;
+}
 #checklist tr:nth-child(odd){
-    background-color: #fff;
-  }
-  
+background-color: #fff;
+}
+
 #checklist tr:hover {
-    background-color: #ddd;
+background-color: #ddd;
 }
 
 .table{
-    padding:10px;
-    
+padding:10px;
+
 }
 
 .schedule{
-    padding: 20px;
-    padding-top: 20px;
-    float:right;
-    width: 35%;
-    font-weight: bold;
-    font-family: 'Poppins', sans-serif;
-    font-size: 14px;
-    min-height:251px;
+padding: 20px;
+padding-top: 20px;
+float:right;
+width: 35%;
+font-weight: bold;
+font-family: 'Poppins', sans-serif;
+font-size: 14px;
+min-height:251px;
 }
 
 .schedule span{
-    text-decoration: underline;
-    font-weight: bolder;
-    font-size: 16px;
+text-decoration: underline;
+font-weight: bolder;
+font-size: 16px;
 }
 
 .icon{
-    padding:10px;
-    float:right;
+padding:10px;
+float:right;
 }
 
 .schedule a{
-    text-decoration: none;
-    color:black;
+text-decoration: none;
+color:black;
 }
 
 .schedule a:hover{
-    color:#5d4954;
+color:#5d4954;
 }
 
 .date{
-    float:right;
-    top:0;
-    text-align:right;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    
+float:right;
+top:0;
+text-align:right;
+padding-top: 5px;
+padding-bottom: 5px;
+
 }
 
 #checklist, #schedule_list {
-    font-family: Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-    table-layout: fixed;
+font-family: Arial, Helvetica, sans-serif;
+border-collapse: collapse;
+width: 100%;
+table-layout: fixed;
 
-  }
-  
+}
+
 #schedule_list td, #schedule_list th {
-    border: 1px solid #ddd;
-    padding: 8px;
-    word-wrap: break-word;
-  }
-  
+border: 1px solid #ddd;
+padding: 8px;
+word-wrap: break-word;
+}
+
 #schedule_list tr:nth-child(even){
-      background-color: #f2f2f2;
-    }
+  background-color: #f2f2f2;
+}
 #schedule_list tr:nth-child(odd){
-    background-color: #fff;
-  }
-  
+background-color: #fff;
+}
+
 #schedule_list tr:hover {
-      background-color: #ddd;
-    }
-  
+  background-color: #ddd;
+}
+
 #schedule_list th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: left;
-    background-color: #5d4954;
-    color: white;
+padding-top: 12px;
+padding-bottom: 12px;
+text-align: left;
+background-color: #5d4954;
+color: white;
 }
 
 #delete{
-    background: #5d4954;
-    color:white;
-    padding:5px;
-    border-radius: 5px;
-    font-family: 'Poppins', sans-serif;
-    text-align:center;
-    border-style: none;
+background: #5d4954;
+color:white;
+padding:5px;
+border-radius: 5px;
+font-family: 'Poppins', sans-serif;
+text-align:center;
+border-style: none;
 }
 
 #delete:hover{
-    background: rgba(38, 199, 64, 0.856);
-    color:black;
-    border-style: none;
+background: rgba(38, 199, 64, 0.856);
+color:black;
+border-style: none;
 }
 
 .chats{
-    float:right;
-    width: 30%;
-    background: rgba(0,0,0,0.1);
+float:right;
+width: 30%;
+background: rgba(0,0,0,0.1);
 }
 
 .chat_icon{
-    float:left;
-    padding:10px;
-    padding-left: 20px;
+float:left;
+padding:10px;
+padding-left: 20px;
 }
 
 .header{
-    text-decoration: none;
-    padding-top:20px;
-    font-weight: bold;
-    font-family: 'Poppins', sans-serif;
-    font-size: 16px;
+text-decoration: none;
+padding-top:20px;
+font-weight: bold;
+font-family: 'Poppins', sans-serif;
+font-size: 16px;
 }
 
 .header a{
-    text-decoration: none;
-    color:black; 
+text-decoration: none;
+color:black; 
 }
 
 .header a:hover{
-    text-decoration: none;
-    color:#5d4954; 
+text-decoration: none;
+color:#5d4954; 
 }
 
 .notifications{
-    text-align: center;
-    padding:20px;
-    padding-bottom: 40px;
-    font-style:italic;
-    min-height:210px;
+text-align: center;
+padding:20px;
+padding-bottom: 40px;
+font-style:italic;
+min-height:210px;
 }
 
 .forum{
-    float:left;
-    width:35%;
-    background-color: rgba(0,0,0,0.1);
-    height: 60%;
+float:left;
+width:35%;
+background-color: rgba(0,0,0,0.1);
+height: 60%;
 }
 
 .reply{
-    text-decoration: none;
-    color:white;
-    border-radius: 5px;
-    border-style: none;
-    padding:5px;
-    background-color:#5d4954;
+text-decoration: none;
+color:white;
+border-radius: 5px;
+border-style: none;
+padding:5px;
+background-color:#5d4954;
 }
 
 
 .reply a{
-    text-decoration: none;
-    color:white;
+text-decoration: none;
+color:white;
 }
 
 .reply:hover{
-    text-decoration: none;
-    color:white;
-    background-color:#666;
+text-decoration: none;
+color:white;
+background-color:#666;
 }
 
 .news{
-    float:right;
-    height: 60%;
-    width: 30%;
-    overflow: hidden;
-    box-shadow: 1px 1px 15px rgba(0,0,0,0.4);
+float:right;
+height: 60%;
+width: 30%;
+overflow: hidden;
+box-shadow: 1px 1px 15px rgba(0,0,0,0.4);
 }
 
 .news .images{
-    height: 100%;
-    width: 100%;
+height: 100%;
+width: 100%;
 }
 
 .images img{
-    height: 100%;
-    width: 100%;
+height: 100%;
+width: 100%;
 }
 
 .end{
-    background:#5d4954;
-    float:right;
-    min-width: 100%;
-    width:100%;
-    text-align:center;
-    padding:15px;
+background:#5d4954;
+float:right;
+min-width: 100%;
+width:100%;
+text-align:center;
+padding:15px;
 }
 
 @media screen and (max-width:1420px){
-    .profile_pic img{
-        width: 170px;
-        height: 180px;
-    }
+.profile_pic img{
+    width: 170px;
+    height: 180px;
+}
 }
 
 @media screen and (max-width:1280px){
-    .profile_pic img{
-        width: 140px;
-        height: 140px;
-    }
+.profile_pic img{
+    width: 140px;
+    height: 140px;
+}
 
-    .info{
-        padding-right:5px;
-        padding-left: 10px;;
-        float:left;
-        font-weight: bold;
-        font-size: 14px;
-        line-height: 25px;
-    }
+.info{
+    padding-right:5px;
+    padding-left: 10px;;
+    float:left;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 25px;
+}
 
-    .info a:hover{
-        font-size:12px;
-    }
+.info a:hover{
+    font-size:12px;
+}
 }
 
 @media screen and (max-width:1024px){
-    .profile_pic img{
-        width: 110px;
-        height: 110px;
-    }
+.profile_pic img{
+    width: 110px;
+    height: 110px;
+}
 
-    .profile_pic{
-        padding-bottom:10px;
-    }
+.profile_pic{
+    padding-bottom:10px;
+}
 
-    .info{
-        padding-top:0px;
-        padding-left:20px;
-        float:left;
-        font-weight: bold;
-        font-size: 14px;
-        line-height: 20px;
-    }
+.info{
+    padding-top:0px;
+    padding-left:20px;
+    float:left;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 20px;
+}
 
-    .info a:hover{
-        font-size:12px;
-    }
+.info a:hover{
+    font-size:12px;
+}
 }
 
 @media screen and (max-width:768px){
-    .profile_pic img{
-        width: 100px;
-        height: 100px;
-        padding-bottom:0px;
-    }
+.profile_pic img{
+    width: 100px;
+    height: 100px;
+    padding-bottom:0px;
+}
+}
+
+#forumtable{
+font-family: Arial, Helvetica, sans-serif;
+border-collapse: collapse;
+width: 80%;
+table-layout: fixed;
+}
+
+#forumtable td{
+border: 1px solid #ddd;
+padding: 8px;
+word-wrap: break-word;
+overflow: hidden;
+white-space: nowrap;
+text-overflow: ellipsis;
+}
+
+#forumtable tr:nth-child(even){
+background-color: #f2f2f2;
+}
+#forumtable tr:nth-child(odd){
+background-color: #fff;
+}
+
+#forumtable tr:hover {
+background-color: #ddd;
+}
+
+#forumtable th {
+padding-top: 12px;
+padding-bottom: 12px;
+text-align: left;
+background-color: #5d4954;
+color: white;
+height:30px;
+}
+
+.forumtime{
+font-size:10px;
+color:gray;
 }
