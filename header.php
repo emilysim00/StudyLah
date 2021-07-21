@@ -10,21 +10,9 @@
     cursor:pointer;
     opacity:0.7;
 }
-.opac:hover{
-    opacity:0.7;
-    cursor:pointer;
-}
 </style>
 <nav>
-    <?php
-    //dashboard
-    if ($_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] =='443'){
-        echo "<div class=\"logo opac\" onclick=\"window.location.href='http://localhost/orbital/dashboard.php/'\">Studylah</div>";
-    }
-    else{
-        echo "<div class=\"logo opac\" onclick=\"window.location.href='http://localhost:8080/orbital/dashboard.php/'\">Studylah</div>";
-    } 
-    ?>
+    <div class="logo">StudyLah</div>
     <ul class="nav-links">
         <li>
             <?php
@@ -34,17 +22,6 @@
             }
             else{
                 echo "<a href=\"http://localhost:8080/orbital/searchusers.php\"><img src=\"img/search-white.png\" width=\"20px\" height=\"20px;\" alt=\"Search\"></a>";
-            } 
-            ?>
-        </li>
-        <li>
-            <?php
-            //notifications
-            if ($_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] =='443'){
-                echo "<a href=\"http://localhost/orbital/notifications.php\"><img src=\"img/bell-white.png\" width=\"20px\" height=\"20px;\" alt=\"Notification\"></a>";
-            }
-            else{
-                echo "<a href=\"http://localhost:8080/orbital/notifications.php\"><img src=\"img/bell-white.png\" width=\"20px\" height=\"20px;\" alt=\"Notification\"></a>";
             } 
             ?>
         </li>
@@ -70,6 +47,7 @@
             } 
             ?>
         </li>
+
         <li>
             <?php
             //Profile
@@ -81,6 +59,37 @@
             } 
             ?>
         </li>
+
+        <li><a href="#">Others</a>
+            <ul class="dropdown">
+                <li><a href="forum.php">Forum</a></li>
+                <li>
+                    <?php
+                    //Profile
+                    if ($_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] =='443'){
+                        echo "<a href=\"http://localhost/orbital/schedule.php\">Add Schedule</a>";
+                    }
+                    else{
+                        echo "<a href=\"http://localhost:8080/orbital/schedule.php\">Add Schedule</a>";
+                    } 
+                    ?>
+                </li>
+                <li>
+                    <?php
+                    //add tasks
+                    if ($_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] =='443'){
+                        echo "<a href=\"http://localhost/orbital/addtask.php\">Add Task</a>";
+                    }
+                    else{
+                        echo "<a href=\"http://localhost:8080/orbital/addtask.php\">Add Tasks</a>";
+                    } 
+                    ?>
+                </li>
+                
+                <li><a href="recommendations.php">Location Recommendations</a></li>
+            </ul>
+        </li>
+
         <li>
             <form method="post">
                 <button type="submit" name="logout" class="logoutbutton">
@@ -111,3 +120,59 @@
     </div>
 </nav>
 <script src="js\app.js"></script>
+
+<style>
+a {
+  text-decoration: none;
+}
+
+
+ul {
+	list-style: none;
+	margin: 0;
+	padding-left: 0;
+}
+
+li {
+	color: #fff;
+	display: block;
+	float: left;
+	padding: 1rem;
+	position: relative;
+	text-decoration: none;
+  transition-duration: 0.5s;
+}
+  
+li a {
+  color: #fff;
+}
+
+li:hover {
+	background: #424240;
+	cursor: pointer;
+}
+
+ul li ul {
+	background: #5d4954;
+	visibility: hidden;
+    opacity: 0;
+    min-width: 5rem;
+	position: absolute;
+    transition: all 0.5s ease;
+    margin-top: 1rem;
+	left: 0;
+    display: none;
+}
+
+ul li:hover > ul,
+ul li ul:hover {
+  visibility: visible;
+  opacity: 1;
+  display: block;
+}
+
+ul li ul li {
+  clear: both;
+  width: 100%;
+}
+</style>

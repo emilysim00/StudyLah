@@ -36,23 +36,64 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
         opacity:0.7;
     }
 
-    .opac:hover{
-        opacity:0.7;
-        cursor:pointer;
+    a {
+        text-decoration: none;
+    }
+
+    ul {
+        list-style: none;
+        margin: 0;
+        padding-left: 0;
+    }
+
+    li {
+        color: #fff;
+        display: block;
+        float: left;
+        padding: 1rem;
+        position: relative;
+        text-decoration: none;
+        transition-duration: 0.5s;
+    }
+    
+    li a {
+        color: #fff;
+    }
+
+    li:hover {
+        background: #424240;
+        cursor: pointer;
+    }
+
+    ul li ul {
+        background: #5d4954;
+        visibility: hidden;
+        opacity: 0;
+        min-width: 5rem;
+        position: absolute;
+        transition: all 0.5s ease;
+        margin-top: 1rem;
+        left: 0;
+        display: none;
+    }
+
+    ul li:hover > ul,
+    ul li ul:hover {
+        visibility: visible;
+        opacity: 1;
+        display: block;
+    }
+
+    ul li ul li {
+        clear: both;
+        width: 100%;
     }
 </style>
+
 <body>
     <!--navbar-->
     <nav>
-        <?php
-        //dashboard
-        if ($_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] =='443'){
-            echo "<div class=\"logo opac\" onclick=\"window.location.href='http://localhost/orbital/dashboard.php/'\">Studylah</div>";
-        }
-        else{
-            echo "<div class=\"logo opac\" onclick=\"window.location.href='http://localhost:8080/orbital/dashboard.php/'\">Studylah</div>";
-        } 
-        ?>
+        <div class="logo">StudyLah</div>
         <ul class="nav-links">
             <li>
                 <?php
@@ -62,17 +103,6 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                 }
                 else{
                     echo "<a href=\"http://localhost:8080/orbital/searchusers.php\"><img src=\"../img/search-white.png\" width=\"20px\" height=\"20px;\" alt=\"Search\"></a>";
-                } 
-                ?>
-            </li>
-            <li>
-                <?php
-                //notifications
-                if ($_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] =='443'){
-                    echo "<a href=\"http://localhost/orbital/notifications.php\"><img src=\"../img/bell-white.png\" width=\"20px\" height=\"20px;\" alt=\"Notification\"></a>";
-                }
-                else{
-                    echo "<a href=\"http://localhost:8080/orbital/notifications.php\"><img src=\"../img/bell-white.png\" width=\"20px\" height=\"20px;\" alt=\"Notification\"></a>";
                 } 
                 ?>
             </li>
@@ -109,6 +139,56 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                 } 
                 ?>
             </li>
+
+            <li><a href="#">Others</a>
+            <ul class="dropdown">
+                <li>
+                    <?php
+                    //forum
+                    if ($_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] =='443'){
+                        echo "<a href=\"http://localhost/orbital/forum.php\">Forum</a>";
+                    }
+                    else{
+                        echo "<a href=\"http://localhost:8080/orbital/forum.php\">Forum</a>";
+                    } 
+                    ?>
+                </li>
+                <li>
+                    <?php
+                    //Schedule
+                    if ($_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] =='443'){
+                        echo "<a href=\"http://localhost/orbital/schedule.php\">Add Schedule</a>";
+                    }
+                    else{
+                        echo "<a href=\"http://localhost:8080/orbital/schedule.php\">Add Schedule</a>";
+                    } 
+                    ?>
+                </li>
+                <li>
+                    <?php
+                    //add tasks
+                    if ($_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] =='443'){
+                        echo "<a href=\"http://localhost/orbital/addtask.php\">Add Task</a>";
+                    }
+                    else{
+                        echo "<a href=\"http://localhost:8080/orbital/addtask.php\">Add Tasks</a>";
+                    } 
+                    ?>
+                </li>
+                <li>
+                    <?php
+                    //locations
+                    if ($_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] =='443'){
+                        echo "<a href=\"http://localhost/orbital/recommendations.php\">Locations Recommendation</a>";
+                    }
+                    else{
+                        echo "<a href=\"http://localhost:8080/orbital/recommendations.php\">Locations Recommendation</a>";
+                    } 
+                    ?>
+                </li>
+            </ul>
+            </li>
+
             <li>
                 <form method="post">
                     <button type="submit" name="logout" class="logoutbutton">
@@ -186,42 +266,7 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
         <div class="chats">
              <div class="chat_icon"><a href="../message.php"><img src="../img/chat.png" width="30" height="30" alt="notifications"></a></div>
              <div class="header"><a href="../chats.php">Notifications</a></div>
-             <div class="notifications">
-             <?php
-             //get message notifications unseen
-             $sqlgetmessages = "SELECT * FROM notifications WHERE NUSEmail = '$useremail' AND (NotificationType = 'Message' OR NotificationType='NewAdded') AND Status= 'Unseen'";
-             $resultgetmessage = mysqli_query($conn,$sqlgetmessages);
-             $messagenotificationcount = 0;
-
-             if(mysqli_num_rows($resultgetmessage) > 0){//got notification message
-                while($rowgetmessage = mysqli_fetch_array($resultgetmessage)){
-                    $messagenotificationcount += 1;
-                }
-
-                echo "● There are $messagenotificationcount new message(s).<br>";
-             }
-             else{
-                 echo "● There are no new messages.<br>";
-             }
-
-             //get forum notifications unseen
-             $sqlgetforums = "SELECT * FROM notifications WHERE NUSEmail = '$useremail' AND NotificationType = 'Forum' AND Status='Unseen'";
-             $resultgetforums = mysqli_query($conn,$sqlgetforums);
-             $forumnotificationcount = 0;
-
-             if(mysqli_num_rows($resultgetforums) > 0){ //got forum notification
-                 while($rowgetforum = mysqli_fetch_array($resultgetforums)){
-                    $forumnotificationcount += 1;
-                 }
-
-                 echo "● There are $forumnotificationcount new forum replies.<br>";
-             }
-             else{
-                 echo "● There are no new forum replies. <br>";
-             }
-
-             ?>
-             </div>
+             <div class="notifications"> There is no notifications.</div>
         </div>
 
 
@@ -469,7 +514,58 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                 </table>
             </div>
         </div>
+        
+        <div class="forum">
+            <div class="chat_icon"><a href="../forum.php"><img src="../img/discussion.png" width="30" height="30" alt="notifications"></a></div>
+            <div class="header"><a href="../forum.php">Forum</a></div>
+            <div class="table">
+                <table id="checklist">
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th></th>
+                <?php 
+                    $servername = "localhost";
+                    $username = "root";
+                    $password = "";
+                    $dbname= "orbital";
 
+                    $mysqli = new mysqli($servername, $username, $password, $dbname); 
+                    if ($mysqli->connect_error) {
+                        die("Connection failed: " . $mysqli->connect_error);
+                    }
+                    
+                    $useremail=$_SESSION['NUSEmail'];
+                    $sqlgetuser="SELECT * FROM users WHERE NUSEmail='$useremail'";
+                    $resultgetuser=mysqli_query($mysqli,$sqlgetuser);
+                    
+                    if(mysqli_num_rows($resultgetuser) > 0){//valid
+                        $query = "SELECT * FROM forum WHERE ReplyToID='0'";
+
+                        if ($result = $mysqli->query($query)) {
+                            while ($row = $result->fetch_assoc()) {  
+                            $title = $row["Title"];
+                            $message = $row["Message"];
+                            $forumid = $row["ForumID"];
+                            $link = "http://localhost:8080/orbital/viewforum.php?forum=".$forumid;
+        
+                            echo '
+                                <tr> 
+                                <td name="task">'.$title.'</td> 
+                                <td name="module">'.$message.'</td> 
+                                <td>
+                                    <button class="reply"><a href='.$link.'>Reply</a></button>
+                                </td>
+                                </tr>
+                                ';
+                                }
+                            $result->free();
+                            }
+                    }
+                        ?>
+                </table>
+            </div>
+        </div>
 
         <div class="news" id="new">
             <div class="images">
@@ -516,6 +612,7 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
         function clicked(){
             return confirm('Are you sure you have completed the task and finish submission?');
         }
+
     </script>
 </body>
 </html>

@@ -15,10 +15,102 @@
         <a href="studylocation.php"><button>Study Location</button></a>
         <a href="recommendations.php"><button>Food</button></a>
     </div>  
+    <style>
+        .filterDiv { /*hide all items by default*/
+        display: none;
+        }
 
-    <div class="middle">
-        <div class="pictures"><img src="reco/2ndlevelYIHstudyroom.JPG" alt="2nd Level YIH Study Room" ></div>
-        <div class="info">
+        .show {
+        display: block;
+        }
+
+        .container {
+        margin-top: 20px;
+        overflow: hidden;
+        }
+
+        /* Style the buttons */
+        .btn {
+        border: none;
+        outline: none;
+        padding: 12px 16px;
+        background-color: #f1f1f1;
+        cursor: pointer;
+        color:black;
+        }
+
+        .btn:hover {
+        background-color: #ddd;
+        }
+
+        .btn.active {
+        background-color: #666;
+        color: white;
+        }
+    </style>
+
+    <div class="selection">
+        <div id="myBtnContainer">
+            <button id="mybutton" class="btn active" onclick="filterSelection('all')"> Show all</button>
+            <button class="btn" onclick="filterSelection('ac')"> Air-Conditioned</button>
+            <button class="btn" onclick="filterSelection('ports')"> Have Charging Ports</button>
+            <button class="btn" onclick="filterSelection('food')"> Food</button>
+            <button class="btn" onclick="filterSelection('24')"> Operate 24/7</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function(event) { 
+            document.getElementById("mybutton").click();
+        });
+
+        filterSelection("all")
+        function filterSelection(c) {
+        var x, i;
+        x = document.getElementsByClassName("filterDiv");
+        if (c == "all") c = "";
+        for (i = 0; i < x.length; i++) {
+            w3RemoveClass(x[i], "show");
+            if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+        }
+        }
+
+        function w3AddClass(element, name) {
+        var i, arr1, arr2;
+        arr1 = element.className.split(" ");
+        arr2 = name.split(" ");
+        for (i = 0; i < arr2.length; i++) {
+            if (arr1.indexOf(arr2[i]) == -1) {element.className += " " + arr2[i];}
+        }
+        }
+
+        function w3RemoveClass(element, name) {
+        var i, arr1, arr2;
+        arr1 = element.className.split(" ");
+        arr2 = name.split(" ");
+        for (i = 0; i < arr2.length; i++) {
+            while (arr1.indexOf(arr2[i]) > -1) {
+            arr1.splice(arr1.indexOf(arr2[i]), 1);     
+            }
+        }
+        element.className = arr1.join(" ");
+        }
+
+        // Add active class to the current button (highlight it)
+        var btnContainer = document.getElementById("myBtnContainer");
+        var btns = btnContainer.getElementsByClassName("btn");
+        for (var i = 0; i < btns.length; i++) {
+        btns[i].addEventListener("click", function(){
+            var current = document.getElementsByClassName("active");
+            current[0].className = current[0].className.replace(" active", "");
+            this.className += " active";
+        });
+        }
+    </script>
+
+    <div class="middle container">
+        <div class="pictures filterDiv ac"><img src="reco/2ndlevelYIHstudyroom.JPG" alt="2nd Level YIH Study Room" ></div>
+        <div class="info filterDiv ac">
             <h2>2nd Level YIH Study Room</h2></br>
                 <p> 
                     Location: Yusof Ishak House, Level 2</br>
@@ -28,8 +120,8 @@
                 </p>  
                 
         </div>
-        <div class="pictures"><img src="reco/2ndlvltownplaza.JPG" alt="2nd Level Town Plaza"></div>
-        <div class="info">
+        <div class="pictures filterDiv ac ports"><img src="reco/2ndlvltownplaza.JPG" alt="2nd Level Town Plaza"></div>
+        <div class="info filterDiv ac ports">
             <h2>2nd Level Town Plaza</h2></br>
                 <p>
                     Location: Above Fine Food, Town Plaza Level 2</br>
@@ -39,8 +131,8 @@
                 </p>
         </div>
     
-    <div class="pictures"><img src="reco/CentralLibrary.JPG" alt="Central Library"></div>
-        <div class="info">
+    <div class="pictures filterDiv ac ports"><img src="reco/CentralLibrary.JPG" alt="Central Library"></div>
+        <div class="info filterDiv ac ports">
             <h2>Central Library</h2></br>
                 <p>
                     Location: Central Library, near FASS</br>
@@ -55,8 +147,8 @@
                 </p>
         </div>
     
-    <div class="pictures"><img src="reco/ComputerCommon.JPG" alt="Computer Common"></div>
-        <div class="info">
+    <div class="pictures filterDiv ac ports"><img src="reco/ComputerCommon.JPG" alt="Computer Common"></div>
+        <div class="info filterDiv ac ports">
             <h2>PC Common</h2></br>
                 <p>
                     Location: UTown, Education Resource Centre Level 1(ERC)</br>
@@ -69,8 +161,8 @@
                 </p>
         </div>
     
-    <div class="pictures"><img src="reco/erc.JPG" alt="Educational Resource Center"></div>
-        <div class="info">
+    <div class="pictures filterDiv ac ports 24"><img src="reco/erc.JPG" alt="Educational Resource Center"></div>
+        <div class="info filterDiv ac ports 24">
             <h2>Educational Resource Center</h2></br>
                 <p>
                     Location: UTown, Education Resource Centre Level 4(ERC)</br>
@@ -83,8 +175,8 @@
                 </p>
         </div>
     
-    <div class="pictures"><img src="reco/erclvl2.JPG" alt="Educational Resource Center Level 2"></div>
-        <div class="info">
+    <div class="pictures filterDiv ac ports 24"><img src="reco/erclvl2.JPG" alt="Educational Resource Center Level 2"></div>
+        <div class="info filterDiv ac ports 24">
             <h2>Educational Resource Center, The Study Level 2</h2></br>
                 <p>
                     Location: UTown, Education Resource Centre Level 1(ERC)</br>
@@ -96,8 +188,8 @@
                 </p>
         </div>
     
-    <div class="pictures"><img src="reco/MACcommons.JPG" alt="Mac Common"></div>
-        <div class="info">
+    <div class="pictures filterDiv ac ports 24"><img src="reco/MACcommons.JPG" alt="Mac Common"></div>
+        <div class="info filterDiv ac ports 24">
             <h2>Mac Common</h2></br>
                 <p>
                     Location: UTown, Education Resource Centre Level 1(ERC)</br>
@@ -109,8 +201,8 @@
                 </p>
         </div>
     
-    <div class="pictures"><img src="reco/outsideERC.JPG" alt="Outside of Educational Resource Center"></div>
-        <div class="info">
+    <div class="pictures filterDiv ports 24"><img src="reco/outsideERC.JPG" alt="Outside of Educational Resource Center"></div>
+        <div class="info filterDiv ports 24">
             <h2>Outside of Educational Resource Center</h2></br>
                 <p>
                     Location: Education Resource Centre Level 2 (ERC)</br>
@@ -121,8 +213,8 @@
                 </p>
         </div>
    
-    <div class="pictures"><img src="reco/outsideUtown.JPG" alt="Outside of UTown Starbucks"></div>
-        <div class="info">
+    <div class="pictures filterDiv ports 24"><img src="reco/outsideUtown.JPG" alt="Outside of UTown Starbucks"></div>
+        <div class="info filterDiv ports 24">
             <h2>Outside of UTown Starbucks</h2></br>
                 <p>
                     Location: Education Resource Centre (ERC) Level 1</br>
@@ -133,8 +225,8 @@
                 </p>
         </div>
    
-    <div class="pictures"><img src="reco/starbucksutown'.JPG" alt="UTown Starbucks"></div>
-        <div class="info">
+    <div class="pictures filterDiv ac food"><img src="reco/starbucksutown'.JPG" alt="UTown Starbucks"></div>
+        <div class="info filterDiv ac food">
             <h2>UTown Starbucks</h2></br>
                 <p>
                     Location: Education Resource Centre (ERC)</br>
@@ -145,8 +237,8 @@
                 </p>
         </div>
   
-    <div class="pictures"><img src="reco/yale-nus.JPG" alt="Yale-NUS Library"></div>
-        <div class="info">
+    <div class="pictures filterDiv ac ports"><img src="reco/yale-nus.JPG" alt="Yale-NUS Library"></div>
+        <div class="info filterDiv ac ports">
             <h2>Yale-NUS Library</h2></br>
                 <p>
                     Location: University Town </br>
