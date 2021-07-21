@@ -60,18 +60,6 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                 } 
                 ?>
             </li>
-            <li>
-                <?php
-                //Profile
-                if ($_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] =='443'){
-                    echo "<a href=\"http://localhost/orbital/profile.php\">Profile</a>";
-                }
-                else{
-                    echo "<a href=\"http://localhost:8080/orbital/profile.php\">Profile</a>";
-                } 
-                ?>
-            </li>
-
             <li><a href="#">Others</a>
             <ul class="dropdown">
                 <li>
@@ -118,9 +106,30 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                     } 
                     ?>
                 </li>
+                <li>
+                    <?php
+                    //notifications
+                    if ($_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] =='443'){
+                        echo "<a href=\"http://localhost/orbital/notifications.php\">Notifications</a>";
+                    }
+                    else{
+                        echo "<a href=\"http://localhost:8080/orbital/notifications.php\">Notifications</a>";
+                    } 
+                    ?>
+                </li>
             </ul>
             </li>
-
+            <li>
+                <?php
+                //Profile
+                if ($_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] =='443'){
+                    echo "<a href=\"http://localhost/orbital/profile.php\">Profile</a>";
+                }
+                else{
+                    echo "<a href=\"http://localhost:8080/orbital/profile.php\">Profile</a>";
+                } 
+                ?>
+            </li>
             <li>
                 <form method="post">
                     <button type="submit" name="logout" class="logoutbutton">
@@ -503,7 +512,7 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                             } 
         
                             echo '
-                                <tr onclick = "window.location.href=\''.$link.'\'"> 
+                                <tr onclick = "window.location.href=\''.$link.'\'" class="forumhover"> 
                                 <td name="task">'.$title.'<br><span class="forumtime">'.$row['Timing'].'</span><br><br>
                                 '.$message.'</td> 
                                 </tr> ';
