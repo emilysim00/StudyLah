@@ -160,7 +160,7 @@
 }
 
 /* The Close Button */
-.close, .close2 {
+.close, .close2, .close3, .close4 {
     color: #aaaaaa;
     float: right;
     font-size: 28px;
@@ -168,25 +168,25 @@
 }
 
 .close:hover,
-.close:focus, .close2:hover, .close2:focus {
+.close:focus, .close2:hover, .close2:focus, .close3:hover, .close3:focus, .close4:hover, .close4:focus {
     color: #000;
     text-decoration: none;
     cursor: pointer;
 }
 
-#groupScheduleTable{
+#groupScheduleTable, #groupTaskTable{
     margin-left:auto;
     margin-right:auto;
     padding:20px;
 }
 
-#groupScheduleTable tr, #groupScheduleTable td{
+#groupScheduleTable tr, #groupScheduleTable td, #groupTaskTable tr, #groupTaskTable td{
     padding:15px;
     text-align:left;
     vertical-align:top;
 }
 
-#groupScheduleButton{
+#groupScheduleButton, #groupTaskButton{
     border:none;
     border-radius:5px;
     padding:5px 8px;
@@ -194,7 +194,7 @@
     color:white;
 }
 
-#groupScheduleButton:hover{
+#groupScheduleButton:hover, #groupTaskButton:hover{
     cursor:pointer;
     opacity:0.7;
 }
@@ -211,19 +211,19 @@
     padding-top:10px;
 }
 
-#viewscheduletable{
+#viewscheduletable, #viewtasktable{
     margin:0 auto;
     padding:20px;
     border-collapse:collapse;   
 }
 
-#viewscheduletable tr, #viewscheduletable td{
+#viewscheduletable tr, #viewscheduletable td, #viewtasktable tr, #viewtasktable td{
     padding:20px;
     text-align:left;
     border:1px solid gray;
 }
 
-#doneSchedule{
+#doneSchedule, #doneTask{
     border:none;
     padding:5px 8px;
     border-radius:5px;
@@ -231,7 +231,30 @@
     color:white;
 }
 
-#doneSchedule:hover{
+#doneSchedule:hover, #doneTask:hover{
     cursor:pointer;
     opacity:0.7;
+}
+
+.lineseparator{
+    border:1px solid black;
+    width:60%;
+    display:block;
+    margin:0 auto;
+    padding:2px;
+    margin-bottom:10px;
+}
+
+#addgrouptask, #viewgrouptask{
+    background-color:#5d4954;
+    color:white;
+    border:none;
+    padding:5px 8px;
+    border-radius:5px;
+    margin-right:10px;
+}
+
+#addgrouptask:hover, #viewgrouptask:hover{
+    opacity:0.7;
+    cursor:pointer;
 }
