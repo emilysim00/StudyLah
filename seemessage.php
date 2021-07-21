@@ -160,6 +160,7 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
 
                                     //sanitize input
                                     $themessagetobesent = mysqli_real_escape_string($conn,$themessagetobesent);
+                                    $themessagetobesent = filter_var($themessagetobesent, FILTER_SANITIZE_STRING);
 
                                     //first get the user full name and id
                                     $sqlgetnameid = "SELECT * FROM users WHERE NUSEmail = '$currentuseremail'";
@@ -285,6 +286,9 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                     $groupscheduletitle = mysqli_real_escape_string($conn, $groupscheduletitle);
                     $groupschedulelocation = mysqli_real_escape_string($conn,$groupschedulelocation);
 
+                    $groupscheduletitle = filter_var($groupscheduletitle, FILTER_SANITIZE_STRING);
+                    $groupschedulelocation = filter_var($groupschedulelocation, FILTER_SANITIZE_STRING);
+
                     //first get the people in the group uniquely
                     $sqlgetpeoplefromgroup = "SELECT * FROM messages WHERE GroupID='$fetchgroup' GROUP BY NUSEmail";//or can grp by user id
                     $resultgetpeoplefromgroup = mysqli_query($conn,$sqlgetpeoplefromgroup);
@@ -377,6 +381,8 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                         //done schedule button
                         if(isset($_POST['doneSchedule'])){
                             $doneschedulename = $_POST['doneScheduleName'];
+                            $doneschedulename = mysqli_real_escape_string($conn,$doneschedulename);
+                            $doneschedulename = filter_var($doneschedulename, FILTER_SANITIZE_STRING);
 
                             //get that event from database
                             $sqlgetevent  = "SELECT * FROM schedule";
