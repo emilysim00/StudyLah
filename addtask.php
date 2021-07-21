@@ -80,6 +80,13 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                             $module=$_POST['Module'];
                             $duedate=$_POST['DueDate'];
                             $duetime=$_POST['DueTime'];
+
+                            //sanitize
+                            $taskname = mysqli_real_escape_string($conn, $taskname);//sanitize
+                            $module = mysqli_real_escape_string($conn, $module);//sanitize
+                            $taskname = filter_var($taskname, FILTER_SANITIZE_STRING);
+                            $module = filter_var($module, FILTER_SANITIZE_STRING);
+
                             //insert into checklist
                             $sqlinsert1="INSERT INTO tasklist (UserID,Tasks,Modules,DueDate,DueTime) VALUES ('$id','$taskname','$module', '$duedate', '$duetime');";
                             $result1=mysqli_query($conn,$sqlinsert1);
