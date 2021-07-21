@@ -344,6 +344,7 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
 
                         //sanitize
                         $thereply = mysqli_real_escape_string($conn, $thereply);
+                        $thereply = filter_var($thereply, FILTER_SANITIZE_STRING);
                         
                         //get curr user details
                         $sqlfetchuser = "SELECT * FROM users WHERE NUSEmail ='$useremail'";
