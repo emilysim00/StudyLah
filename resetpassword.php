@@ -110,6 +110,10 @@ body{
                         $secondpassword = mysqli_real_escape_string($conn,$secondpassword);
                         $nusemail = mysqli_real_escape_string($conn,$nusemail);
 
+                        $firstpassword = filter_var($firstpassword, FILTER_SANITIZE_STRING);
+                        $secondpassword = filter_var($secondpassword, FILTER_SANITIZE_STRING);
+                        $nusemail= filter_var($nusemail, FILTER_SANITIZE_STRING);
+
                         if($firstpassword != $secondpassword){//password not same 
                             $url="http://localhost/orbital/resetpassword.php?token=$thetoken";
                             header('Location:' . $url);
