@@ -102,6 +102,7 @@ if (isset($_POST['createGroup'])){
 
     //sanitize
     $groupname = mysqli_real_escape_string($conn, $groupname);
+    $groupname = filter_var($groupname, FILTER_SANITIZE_STRING);
 
     $imagename = "";
     $imagetoken = bin2hex(random_bytes(15));//Generate unique random token to append to imagename
@@ -183,6 +184,8 @@ if (isset($_POST['createGroup'])){
 
     //insert other users apart from myself ----------------------------------------------
     $finalmembers = $_POST['finalMember'];
+    $finalmembers = mysqli_real_escape_string($conn, $finalmembers);//sanitize
+    $finalmembers = filter_var($finalmembers, FILTER_SANITIZE_STRING);
     //insert new message default in group
     $memberexplode=explode(",", $finalmembers);//split by comma
     for($eachmem = 0;$eachmem < count($memberexplode); $eachmem++){
