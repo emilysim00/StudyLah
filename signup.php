@@ -83,6 +83,9 @@ date_default_timezone_set('Asia/Singapore');
                         //sanitize input
                         $loginpassword = mysqli_real_escape_string($conn, $loginpassword);
                         $loginemail = mysqli_real_escape_string($conn,$loginemail);
+                        $loginpassword = filter_var($loginpassword, FILTER_SANITIZE_STRING);
+                        $loginemail = filter_var($loginemail, FILTER_SANITIZE_STRING);
+
                         //hash password before checking
                         $loginpasswordhash = md5($loginpassword);
 
@@ -226,6 +229,14 @@ date_default_timezone_set('Asia/Singapore');
                             $signupresidency=mysqli_real_escape_string($conn,$signupresidency);
                             $signupemail=mysqli_real_escape_string($conn,$signupemail);
 
+                            $signupname = filter_var($signupname, FILTER_SANITIZE_STRING);
+                            $signupgender = filter_var($signupgender, FILTER_SANITIZE_STRING);
+                            $signuppassword = filter_var($signuppassword, FILTER_SANITIZE_STRING);
+                            $signupcourse = filter_var($signupcourse, FILTER_SANITIZE_STRING);
+                            $signupcurrentmod = filter_var($signupcurrentmod, FILTER_SANITIZE_STRING);
+                            $signupyear = filter_var($signupyear, FILTER_SANITIZE_STRING);
+                            $signupresidency = filter_var($signupresidency, FILTER_SANITIZE_STRING);
+                            $signupemail = filter_var($signupemail, FILTER_SANITIZE_STRING);
 
                             //check for duplicate emails in system
                             $sqlcheckduplicate="SELECT * FROM users WHERE NUSEmail='$signupemail'";
