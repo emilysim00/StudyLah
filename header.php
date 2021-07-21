@@ -47,22 +47,19 @@
             } 
             ?>
         </li>
-
-        <li>
-            <?php
-            //Profile
-            if ($_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] =='443'){
-                echo "<a href=\"http://localhost/orbital/profile.php\">Profile</a>";
-            }
-            else{
-                echo "<a href=\"http://localhost:8080/orbital/profile.php\">Profile</a>";
-            } 
-            ?>
-        </li>
-
         <li><a href="#">Others</a>
             <ul class="dropdown">
-                <li><a href="forum.php">Forum</a></li>
+                <li>
+                    <?php
+                    //forum
+                    if ($_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] =='443'){
+                        echo "<a href=\"http://localhost/orbital/forum.php\">Forum</a>";
+                    }
+                    else{
+                        echo "<a href=\"http://localhost:8080/orbital/forum.php\">Forum</a>";
+                    } 
+                    ?>
+                </li>
                 <li>
                     <?php
                     //Profile
@@ -85,11 +82,41 @@
                     } 
                     ?>
                 </li>
-                
-                <li><a href="recommendations.php">Location Recommendations</a></li>
+                <li>
+                    <?php
+                    //locations
+                    if ($_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] =='443'){
+                        echo "<a href=\"http://localhost/orbital/recommendations.php\">Locations Recommendation</a>";
+                    }
+                    else{
+                        echo "<a href=\"http://localhost:8080/orbital/recommendations.php\">Locations Recommendation</a>";
+                    } 
+                    ?>
+                </li>
+                <li>
+                    <?php
+                    //notifications
+                    if ($_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] =='443'){
+                        echo "<a href=\"http://localhost/orbital/notifications.php\">Notifications</a>";
+                    }
+                    else{
+                        echo "<a href=\"http://localhost:8080/orbital/notifications.php\">Notifications</a>";
+                    } 
+                    ?>
+                </li>
             </ul>
         </li>
-
+        <li>
+            <?php
+            //Profile
+            if ($_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] =='443'){
+                echo "<a href=\"http://localhost/orbital/profile.php\">Profile</a>";
+            }
+            else{
+                echo "<a href=\"http://localhost:8080/orbital/profile.php\">Profile</a>";
+            } 
+            ?>
+        </li>
         <li>
             <form method="post">
                 <button type="submit" name="logout" class="logoutbutton">
