@@ -513,7 +513,7 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
         
                             echo '
                                 <tr onclick = "window.location.href=\''.$link.'\'" class="forumhover"> 
-                                <td name="task">'.$title.'<br><span class="forumtime">'.$row['Timing'].'</span><br><br>
+                                <td name="task"><b>'.$title.'</b><br><span class="forumtime">'.$row['Timing'].'</span><br><br>
                                 '.$message.'</td> 
                                 </tr> ';
                                 }
