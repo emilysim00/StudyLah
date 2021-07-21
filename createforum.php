@@ -99,7 +99,11 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
 
                     //sanitize
                     $forumtitle = mysqli_real_escape_string($conn, $forumtitle);
-                    $forumText = mysqli_real_escape_string($conn,$forumText);
+                    $forumText = mysqli_real_escape_string($conn,$forumText);//sql
+
+                    $forumtitle = filter_var($forumtitle, FILTER_SANITIZE_STRING);
+                    $forumText = filter_var($forumText, FILTER_SANITIZE_STRING);//xss
+
                     //first get current user
                     $sqlgetcurrentuser = "SELECT * FROM users WHERE NUSEmail = '$useremail'";
                     $resultgetcurrentuser = mysqli_query($conn, $sqlgetcurrentuser);
