@@ -23,7 +23,7 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
     <link rel="stylesheet" href="css\navbar.css">
     <link rel="stylesheet" href="css\message.css">
     <link rel="stylesheet" href="css\seemessage.css">
-    <meta http-equiv="refresh" content="20" /><!--reload page every 20 seconds-->
+    <meta http-equiv="refresh" content="40" /><!--reload page every 40 seconds-->
     <title>StudyLah</title>
 </head>
 <body style="font-family:'Inter',sans-serif;" onload="updateScroll()">
