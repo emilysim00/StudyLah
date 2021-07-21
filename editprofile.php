@@ -243,41 +243,49 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
         }
         if(!empty($_POST['editFullName'])){
             $newfullname = mysqli_real_escape_string($conn, $_POST['editFullName']);//sanitize
+            $newfullname = filter_var($newfullname, FILTER_SANITIZE_STRING);
             $sqlupdateuser="UPDATE users SET FullName='$newfullname' WHERE NUSEmail='$nusemail'";
             $resultupdateuser=mysqli_query($conn,$sqlupdateuser);
         }
         if(!empty($_POST['editCourse'])){
             $newcourse = mysqli_real_escape_string($conn,$_POST['editCourse']);//sanitize
+            $newcourse = filter_var($newcourse, FILTER_SANITIZE_STRING);
             $sqlupdateuser="UPDATE users SET Course='$newcourse' WHERE NUSEmail='$nusemail'";
             $resultupdateuser=mysqli_query($conn,$sqlupdateuser);
         }
         if(!empty($_POST['editYearOfStudy'])){
             $newyearofstudy = mysqli_real_escape_string($conn,$_POST['editYearOfStudy']);//sanitize
+            $newyearofstudy = filter_var($newyearofstudy, FILTER_SANITIZE_STRING);
             $sqlupdateuser="UPDATE users SET YearOfStudy='$newyearofstudy' WHERE NUSEmail='$nusemail'";
             $resultupdateuser=mysqli_query($conn,$sqlupdateuser);
         }
         if(!empty($_POST['editBio'])){
             $newBio = mysqli_real_escape_string($conn, $_POST['editBio']);//sanitize
+            $newBio = filter_var($newBio, FILTER_SANITIZE_STRING);
             $sqlupdateuser="UPDATE users SET Bio='$newBio' WHERE NUSEmail='$nusemail'";
             $resultupdateuser=mysqli_query($conn,$sqlupdateuser);
         }
         if(!empty($_POST['editResidency'])){
             $newResidency = mysqli_real_escape_string($conn,$_POST['editResidency']);//sanitize
+            $newResidency = filter_var($newResidency, FILTER_SANITIZE_STRING);
             $sqlupdateuser="UPDATE users SET ResidencyStatus='$newResidency' WHERE NUSEmail='$nusemail'";
             $resultupdateuser=mysqli_query($conn,$sqlupdateuser);
         }
         if(!empty($_POST['editCurrentMod'])){
             $newCurrentMod = mysqli_real_escape_string($conn,$_POST['editCurrentMod']);//sanitize
+            $newCurrentMod = filter_var($newCurrentMod, FILTER_SANITIZE_STRING);
             $sqlupdateuser="UPDATE users SET CurrentMod='$newCurrentMod' WHERE NUSEmail='$nusemail'";
             $resultupdateuser=mysqli_query($conn,$sqlupdateuser);
         }
         if(!empty($_POST['editPastMod'])){
             $newPastMod = mysqli_real_escape_string($conn,$_POST['editPastMod']);//sanitize
+            $newPastMod = filter_var($newPastMod, FILTER_SANITIZE_STRING);
             $sqlupdateuser="UPDATE users SET PastMod='$newPastMod' WHERE NUSEmail='$nusemail'";
             $resultupdateuser=mysqli_query($conn,$sqlupdateuser);
         }
         if(!empty($_POST['editCCA'])){
             $newCCA = mysqli_real_escape_string($conn,$_POST['editCCA']);//sanitize
+            $newCCA = filter_var($newCCA, FILTER_SANITIZE_STRING);
             $sqlupdateuser="UPDATE users SET CCA='$newCCA' WHERE NUSEmail='$nusemail'";
             $resultupdateuser=mysqli_query($conn,$sqlupdateuser);
         }
