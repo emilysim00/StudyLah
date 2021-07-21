@@ -21,75 +21,7 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
     <link rel="stylesheet" href="..\css\dashboard.css">
     <link rel="stylesheet" href="..\css\navbar.css">
     <title>StudyLah</title>
-
 </head>
-<style>
-    .logoutbutton{
-        vertical-align:middle;
-        background-color: #5d4954;
-        color:white;
-        border:none;
-    }
-
-    .logoutbutton:hover{
-        cursor:pointer;
-        opacity:0.7;
-    }
-
-    a {
-        text-decoration: none;
-    }
-
-    ul {
-        list-style: none;
-        margin: 0;
-        padding-left: 0;
-    }
-
-    li {
-        color: #fff;
-        display: block;
-        float: left;
-        padding: 1rem;
-        position: relative;
-        text-decoration: none;
-        transition-duration: 0.5s;
-    }
-    
-    li a {
-        color: #fff;
-    }
-
-    li:hover {
-        background: #424240;
-        cursor: pointer;
-    }
-
-    ul li ul {
-        background: #5d4954;
-        visibility: hidden;
-        opacity: 0;
-        min-width: 5rem;
-        position: absolute;
-        transition: all 0.5s ease;
-        margin-top: 1rem;
-        left: 0;
-        display: none;
-    }
-
-    ul li:hover > ul,
-    ul li ul:hover {
-        visibility: visible;
-        opacity: 1;
-        display: block;
-    }
-
-    ul li ul li {
-        clear: both;
-        width: 100%;
-    }
-</style>
-
 <body>
     <!--navbar-->
     <nav>
@@ -243,21 +175,33 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                         //display profile picture
                         $profilepic=$rowgetuser['ProfilePic'];
                         if($profilepic=="" || $profilepic==NULL){
-                            echo "<div class=profile_pic><a href=\"http://localhost:8080/orbital/profile.php\"><img src=\"..\img/user.png\" alt=\"profilepic\"></a></div>";
+                            echo "<div class=profile_pic>";
+                            if ($_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] =='443'){
+                                echo "<a href=\"http://localhost/orbital/profile.php\"><img src=\"..\img/user.png\" alt=\"profilepic\"></a></div>";
+                            }
+                            else{
+                                echo "<a href=\"http://localhost:8080/orbital/profile.php\"><img src=\"..\img/user.png\" alt=\"profilepic\"></a></div>";
+                            } 
                         }
                         else{
-                            echo "<div class=profile_pic><a href=\"http://localhost:8080/orbital/profile.php\"><img src=\"../userprofilepic/$profilepic\" alt=\"profilepic\"></a></div>";
+                            echo "<div class=profile_pic>";
+                            if ($_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] =='443'){
+                                echo "<a href=\"http://localhost/orbital/profile.php\"><img src=\"../userprofilepic/$profilepic\" alt=\"profilepic\"></a></div>";
+                            }
+                            else{
+                                echo "<a href=\"http://localhost:8080/orbital/profile.php\"><img src=\"../userprofilepic/$profilepic\" alt=\"profilepic\"></a></div>";
+                            } 
                         }
                         //display name, course and year
                         $fullname= $rowgetuser['FullName'];
                         $course= $rowgetuser['Course'];
                         $yearofstudy = $rowgetuser['YearOfStudy'];
-                        echo "<div class=info><a href=\"http://localhost:8080/orbital/profile.php\">$fullname <br> $course Year $yearofstudy</a></div>";
-
-                        //$bio = $rowgetuser['Bio'];
-                        //if($bio != "" || $bio!=NULL){
-                         //   echo "<div class=\"profilebio\"> \" $bio \"</div>";
-                        //}
+                        if ($_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] =='443'){
+                            echo "<div class=info><a href=\"http://localhost/orbital/profile.php\">$fullname <br> $course Year $yearofstudy</a></div>";
+                        }
+                        else{
+                            echo "<div class=info><a href=\"http://localhost:8080/orbital/profile.php\">$fullname <br> $course Year $yearofstudy</a></div>";
+                        } 
                     }}
         ?>
         </div>
@@ -388,6 +332,13 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                             $module=$_POST['Module'];
                             $duedate=$_POST['DueDate'];
                             $duetime=$_POST['DueTime'];
+
+                            //sanitize
+                            $taskname = mysqli_real_escape_string($conn, $taskname);//sanitize
+                            $module = mysqli_real_escape_string($conn, $module);//sanitize
+                            $taskname = filter_var($taskname, FILTER_SANITIZE_STRING);
+                            $module = filter_var($module, FILTER_SANITIZE_STRING);
+
                             //insert into checklist
                             $sqlinsert1="INSERT INTO tasklist (UserID,Tasks,Modules,DueDate,DueTime) VALUES ('$id','$taskname','$module', '$duedate', '$duetime');";
                             $result1=mysqli_query($conn,$sqlinsert1);
@@ -518,12 +469,9 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
         <div class="forum">
             <div class="chat_icon"><a href="../forum.php"><img src="../img/discussion.png" width="30" height="30" alt="notifications"></a></div>
             <div class="header"><a href="../forum.php">Forum</a></div>
-            <div class="table">
-                <table id="checklist">
+                <table id="forumtable">
                     <tr>
                         <th>Title</th>
-                        <th>Description</th>
-                        <th></th>
                 <?php 
                     $servername = "localhost";
                     $username = "root";
@@ -540,42 +488,41 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                     $resultgetuser=mysqli_query($mysqli,$sqlgetuser);
                     
                     if(mysqli_num_rows($resultgetuser) > 0){//valid
-                        $query = "SELECT * FROM forum WHERE ReplyToID='0'";
+                        $query = "SELECT * FROM forum WHERE ReplyToID='0' LIMIT 3";//limit to 3 post
 
                         if ($result = $mysqli->query($query)) {
                             while ($row = $result->fetch_assoc()) {  
                             $title = $row["Title"];
                             $message = $row["Message"];
                             $forumid = $row["ForumID"];
-                            $link = "http://localhost:8080/orbital/viewforum.php?forum=".$forumid;
+                            if ($_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] =='443'){
+                                $link = "http://localhost/orbital/viewforum.php?forum=".$forumid;
+                            }
+                            else{
+                                $link = "http://localhost:8080/orbital/viewforum.php?forum=".$forumid;
+                            } 
         
                             echo '
-                                <tr> 
-                                <td name="task">'.$title.'</td> 
-                                <td name="module">'.$message.'</td> 
-                                <td>
-                                    <button class="reply"><a href='.$link.'>Reply</a></button>
-                                </td>
-                                </tr>
-                                ';
+                                <tr onclick = "window.location.href=\''.$link.'\'"> 
+                                <td name="task">'.$title.'<br><span class="forumtime">'.$row['Timing'].'</span><br><br>
+                                '.$message.'</td> 
+                                </tr> ';
                                 }
                             $result->free();
                             }
                     }
                         ?>
                 </table>
-            </div>
         </div>
-
         <div class="news" id="new">
-            <div class="images">
-                <img src="../img/biz.jpg" alt="Business School">
-                <img src="../img/bus.jpg" alt="Shuttle Bus">
-                <img src="../img/de.jpg" alt="School of Design & Engineering">
-                <img src="../img/utown.jpg" alt="U-Town">
-                <img src="../img/soc.jpg" alt="School of Computing">
+                <div class="images">
+                    <img src="../img/biz.jpg" alt="Business School">
+                    <img src="../img/bus.jpg" alt="Shuttle Bus">
+                    <img src="../img/de.jpg" alt="School of Design & Engineering">
+                    <img src="../img/utown.jpg" alt="U-Town">
+                    <img src="../img/soc.jpg" alt="School of Computing">
+                </div>
             </div>
-        </div>
 
 
     <div class="end">
