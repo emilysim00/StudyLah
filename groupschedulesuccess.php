@@ -310,7 +310,7 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                 ?>
                 <div class="successtext">
                     <img src="img/success.png" width="80px" height="80px" alt="success">
-                    <p>Group action successfully changed!</p>
+                    <p>Group action successful!</p>
                 </div>
             </div>
             </div>
