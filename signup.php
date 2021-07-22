@@ -46,7 +46,6 @@ date_default_timezone_set('Asia/Singapore');
                     <button id="login_btn" type="button" class="toggle-btn" onclick="login()">Log In</button>
                     <button id="register_btn" type="button" class="toggle-btn" onclick="register()">Register</button>
                 </div>
-
                 <!--Login-->
                 <form id="login" class="input-group" method="post" enctype="multipart/form-data">
                     <input type="email" name="LoginStudentEmail" class="input-field" placeholder="User Email" required>
@@ -87,7 +86,7 @@ date_default_timezone_set('Asia/Singapore');
                         $loginemail = filter_var($loginemail, FILTER_SANITIZE_STRING);
 
                         //hash password before checking
-                        $loginpasswordhash = sha256($loginpassword);
+                        $loginpasswordhash = hash('sha256', $loginpassword);
 
                         $sqlfetchlogin="SELECT * FROM users WHERE NUSEmail='$loginemail' AND Password='$loginpasswordhash'";
                         $resultfetchlogin=mysqli_query($conn,$sqlfetchlogin);
@@ -257,7 +256,7 @@ date_default_timezone_set('Asia/Singapore');
                                 //now check for nus email by using strpos
                                 if(strpos($signupemail,"@u.nus.edu") == true){
                                     //hash password
-                                    $signuppasswordhash = sha256($signuppassword);
+                                    $signuppasswordhash = hash('sha256', $signuppassword);
 
                                     //insert into sign up
                                     $sqlinsert1="INSERT INTO signup (FullName,Gender,Password,Course,CurrentMod,YearOfStudy,ResidencyStatus,NUSEmail)
