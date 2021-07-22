@@ -87,7 +87,7 @@ date_default_timezone_set('Asia/Singapore');
                         $loginemail = filter_var($loginemail, FILTER_SANITIZE_STRING);
 
                         //hash password before checking
-                        $loginpasswordhash = md5($loginpassword);
+                        $loginpasswordhash = sha256($loginpassword);
 
                         $sqlfetchlogin="SELECT * FROM users WHERE NUSEmail='$loginemail' AND Password='$loginpasswordhash'";
                         $resultfetchlogin=mysqli_query($conn,$sqlfetchlogin);
@@ -257,7 +257,7 @@ date_default_timezone_set('Asia/Singapore');
                                 //now check for nus email by using strpos
                                 if(strpos($signupemail,"@u.nus.edu") == true){
                                     //hash password
-                                    $signuppasswordhash = md5($signuppassword);
+                                    $signuppasswordhash = sha256($signuppassword);
 
                                     //insert into sign up
                                     $sqlinsert1="INSERT INTO signup (FullName,Gender,Password,Course,CurrentMod,YearOfStudy,ResidencyStatus,NUSEmail)
