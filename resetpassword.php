@@ -120,7 +120,7 @@ body{
                         }
                         else{
                             //hash password before placing into db
-                            $hashedpassword = sha256($secondpassword);
+                            $hashedpassword = hash('sha256', $secondpassword);
                             //update password
                             $sqlupdatepass = "UPDATE users SET Password = '$hashedpassword' WHERE NUSEmail = '$nusemail'";
                             $resultupdatepass = mysqli_query($conn,$sqlupdatepass);
