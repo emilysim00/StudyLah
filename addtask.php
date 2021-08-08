@@ -92,8 +92,14 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                             $result1=mysqli_query($conn,$sqlinsert1);
 
                             
-                        $url="http://localhost:8080/orbital/addtask.php";
-                        header('Location:' . $url);
+                        if ($_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] =='443'){
+                            $url="http://localhost/orbital/addtask.php";
+                            header('Location:' . $url);
+                        }
+                        else{
+                            $url="http://localhost:8080/orbital/addtask.php";
+                            header('Location:' . $url);
+                        } 
 
                         }
 
@@ -193,8 +199,16 @@ if (!isset( $_SESSION['NUSEmail'] ) ) {
                                 
                             $conn->close();
 
-                            $url="http://localhost:8080/orbital/addtask.php";
-                            header('Location:' . $url);
+                            if ($_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] =='443'){
+                                $url="http://localhost/orbital/addtask.php";
+                                header('Location:' . $url);
+                            }
+                            else{
+                                $url="http://localhost:8080/orbital/addtask.php";
+                                header('Location:' . $url);
+                            } 
+
+                            
                             }
                     ?>
                 </table>
